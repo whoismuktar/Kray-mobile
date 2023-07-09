@@ -11,13 +11,13 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setState: (state, action) => {
-      state.userPartyCategories = action.payload;
+    setOnboardingCurrentStage: (state, action) => {
+      state.onboarding.currentStage = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setState } = appSlice.actions;
+export const { setOnboardingCurrentStage } = appSlice.actions;
 
 export default appSlice.reducer;
