@@ -17,9 +17,11 @@ import { setOnboardingCurrentStage } from "../../redux/app";
 
 import SvgUri from "react-native-svg-uri";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const OnboardingView = (props) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const { onboarding } = useSelector((state) => state.app);
   const { currentStage } = onboarding;
@@ -38,8 +40,11 @@ const OnboardingView = (props) => {
         }}
       >
         <Stepper />
-        <Pressable style={{ marginRight: 20 }}>
-          <Text weight="bold">SKIP</Text>
+        <Pressable
+          style={{ marginRight: 20 }}
+          onPress={navigation.navigate("Auth")}
+        >
+          <Text>SKIP</Text>
         </Pressable>
       </View>
 
@@ -90,7 +95,10 @@ const OnboardingView = (props) => {
         </View>
       )}
 
-      <Button text="Continue" onPress={gotoNextStage} />
+      <Button
+        text={currentStage < 3 ? "Continue" : "Get Started"}
+        onPress={gotoNextStage}
+      />
     </View>
   );
 };
