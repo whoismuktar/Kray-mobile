@@ -52,7 +52,7 @@ export const inputStyle = {
 };
 
 export const textBase = {
-  fontFamily: "Inter-Bold",
+  fontFamily: "Inter-Regular",
   fontSize: 13,
 };
 
@@ -65,7 +65,7 @@ export const textStyle = {
     color: "red",
     fontSize: 13,
   },
-  sectionTitle: {
+  header1: {
     fontSize: 18,
     marginBottom: 10,
   },
@@ -83,6 +83,7 @@ const btnBase = {
   marginBottom: 15,
   fontWeight: "bold",
   marginTop: 25,
+  height: 60,
 };
 
 export const btnStyle = {
