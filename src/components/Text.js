@@ -4,6 +4,7 @@ import { textBase, textStyle } from "../assets/styles/base";
 function Text(props) {
   const children = props.children;
   const weight = props.weight;
+  const type = props.type;
 
   return (
     <ExpoText
@@ -11,7 +12,8 @@ function Text(props) {
       style={[
         styles.textStyle,
         weight && textStyle[weight],
-        { ...props.styles },
+        type && textStyle[type],
+        { ...props.style },
       ]}
     >
       {children}
