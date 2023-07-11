@@ -39,6 +39,9 @@ function RegisterVerification({ navigation }) {
   const ResendVerification = () => {
     // resend request here
     // axios.get
+    if (!canResend) {
+      return
+    }
 
     setResetCount(defaultCount);
     setStartTimer(true);
@@ -46,7 +49,7 @@ function RegisterVerification({ navigation }) {
   };
   const Resend = () => (
     <Text
-      onPress={canResend && ResendVerification}
+      onPress={ResendVerification}
       style={{
         ...styles.verifyBtn,
         color: !canResend && baseStyle.gray300
