@@ -120,6 +120,7 @@ function RegisterVerification({ navigation }) {
         <View style={styles.container}>
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[0]}
             placeholder="1"
             onChange={(evt) => onChangeInput(evt, 0)}
@@ -131,6 +132,7 @@ function RegisterVerification({ navigation }) {
           />
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[1]}
             placeholder="2"
             onChange={(evt) => onChangeInput(evt, 1)}
@@ -142,6 +144,7 @@ function RegisterVerification({ navigation }) {
           />
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[2]}
             placeholder="3"
             onChange={(evt) => onChangeInput(evt, 2)}
@@ -153,6 +156,7 @@ function RegisterVerification({ navigation }) {
           />
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[3]}
             placeholder="4"
             onChange={(evt) => onChangeInput(evt, 3)}
@@ -164,6 +168,7 @@ function RegisterVerification({ navigation }) {
           />
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[4]}
             placeholder="5"
             onChange={(evt) => onChangeInput(evt, 4)}
@@ -175,6 +180,7 @@ function RegisterVerification({ navigation }) {
           />
           <Input
             style={styles.input}
+            showInputBorder
             value={inputs[5]}
             placeholder="6"
             onChange={(evt) => onChangeInput(evt, 5)}

@@ -81,7 +81,6 @@ export const textStyle = {
   },
   paragraph4: {
     fontSize: 14,
-    marginBottom: 10,
   },
 };
 

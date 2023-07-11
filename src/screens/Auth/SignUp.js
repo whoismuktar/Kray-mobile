@@ -60,7 +60,7 @@ const SignUp = () => {
           <Input
             icon={<UserIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
-            placeholder="Input Text"
+            placeholder="Enter first name"
             onChangeText={setFirstName}
             value={firstName}
           />
@@ -72,7 +72,7 @@ const SignUp = () => {
           <Input
             icon={<UserIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
-            placeholder="Input Text"
+            placeholder="Enter put last name"
             onChangeText={setLastName}
             value={lastName}
           />
@@ -97,7 +97,7 @@ const SignUp = () => {
           <Input
             icon={<LockClosedIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
-            placeholder="Input Text"
+            placeholder="Enter password"
             onChangeText={onChangePassword}
             value={password}
           />

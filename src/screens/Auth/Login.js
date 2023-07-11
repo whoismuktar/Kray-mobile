@@ -64,7 +64,7 @@ const SignUp = () => {
           <Input
             icon={<LockClosedIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
-            placeholder="Input Text"
+            placeholder="Enter password"
             onChangeText={onChangePassword}
             value={password}
           />
@@ -92,6 +92,13 @@ const SignUp = () => {
             </>
           </Pressable>
         </View>
+
+        <Text
+          type="paragraph4"
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
+          Forgot Password?
+        </Text>
 
         <View style={baseStyle.section}>
           <Button disabled={true} text="Log In" />

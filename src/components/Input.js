@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { baseStyle, inputStyle } from "../assets/styles/base";
 
 function Input(props) {
+  const showInputBorder = props.showInputBorder;
   const hasLeftIcon = props.hasLeftIcon;
   const hasRightIcon = props.hasRightIcon;
   const hasIcon = props.icon;
@@ -23,6 +24,7 @@ function Input(props) {
         {...props}
         style={[
           styles.appInput,
+          showInputBorder && styles.inputBorder,
           hasIcon && styles.inputHasIcon,
           hasRightIcon && styles.inputHasRightIcon,
           { ...props.style },
@@ -42,6 +44,8 @@ const styles = StyleSheet.create({
   appInput: {
     ...inputStyle,
     width: "100%",
+  },
+  inputBorder: {
     borderWidth: 1,
     borderColor: baseStyle.gray300,
   },
@@ -58,6 +62,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: baseStyle.gray300,
   },
   hasLeftIcon: {
     paddingLeft: 15,
