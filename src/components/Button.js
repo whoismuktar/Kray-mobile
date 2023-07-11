@@ -36,7 +36,7 @@ function Button(props) {
           <View style={btnStyle.hasIcon.iconLeft}>{props.icon}</View>
         )}
 
-        <Text style={[styles.btnText, props.btnTextStyle,]}>
+        <Text style={[styles.btnText, btnStyle[btnType]?.textStyle, props.btnTextStyle,]}>
           {props.text}
         </Text>
       </Pressable>

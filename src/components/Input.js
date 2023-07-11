@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
   appInput: {
     ...inputStyle,
     width: "100%",
+    borderWidth: 1,
+    borderColor: baseStyle.gray300,
   },
   inputHasIcon: {
     marginTop: 0,
@@ -56,8 +58,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 10,
-    borderColor: baseStyle.gray300,
-    borderWidth: 1,
   },
   hasLeftIcon: {
     paddingLeft: 15,

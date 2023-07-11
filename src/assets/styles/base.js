@@ -131,6 +131,9 @@ export const btnStyle = {
     textDecorationLine: "underline",
     alignSelf: "center",
     fontWeight: "bold",
+    textStyle: {
+      color: baseStyle.black
+    }
   },
   outlinedBtn: {
     ...btnBase,

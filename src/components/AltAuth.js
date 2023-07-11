@@ -12,7 +12,7 @@ const AltAuth = ({ mode = "signUp" }) => {
   return (
     <View style={{ alignItems: "center" }}>
       <Text weight="medium" style={{ marginBottom: 30 }}>
-        or {mode} with
+        or {isSignUp ? "sign up" : "log in"} with
       </Text>
       <View
         style={{
