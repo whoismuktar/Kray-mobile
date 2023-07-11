@@ -8,6 +8,7 @@ import LoginScreen from "./src/screens/Auth/Login"
 import RegisterVerificationScreen from "./src/screens/Auth/RegisterVerification"
 import ForgotPasswordScreen from "./src/screens/Auth/ForgotPassword";
 import ChangePasswordScreen from "./src/screens/Auth/ChangePassword"
+import SelectCategoryScreen from "./src/screens/Onboarding/SelectCategory"
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ChangePassword" // change during auth
+        initialRouteName="SelectCategory" // change during auth
         screenOptions={{
           headerShadowVisible: false,
           headerBackTitleVisible: false,
@@ -66,6 +67,11 @@ export default function Navigator() {
         <Stack.Screen
           name="ChangePassword"
           component={ChangePasswordScreen}
+          options={{}}
+        />
+        <Stack.Screen
+          name="SelectCategory"
+          component={SelectCategoryScreen}
           options={{}}
         />
       </Stack.Navigator>
