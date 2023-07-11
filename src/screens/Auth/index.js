@@ -1,7 +1,7 @@
 import React from "react";
 import { ImageBackground, View } from "react-native";
 import { baseStyle, textStyle } from "../../assets/styles/base";
-import Logo from "../../assets/images/randomLogo.png";
+import Logo from "../../assets/images/random-logo.svg";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { Pressable as Presser } from "react-native";
@@ -12,24 +12,17 @@ function Auth(props) {
 
   return (
     <View style={baseStyle.page}>
-      <ImageBackground
-        source={Logo}
-        resizeMode="contain"
-        style={{
-          width: "100%",
-          height: 150,
-        }}
-      ></ImageBackground>
+      <Logo width="100%" height={160} />
 
       <Text
         weight="medium"
         type="header1"
-        style={{ textAlign: "center", marginTop: 40 }}
+        style={{ textAlign: "center", marginTop: 40, marginBottom: 20 }}
       >
         Welcome KRAY
       </Text>
 
-      <Text style={{ textAlign: "center" }}>
+      <Text style={{ textAlign: "center", marginBottom: 20 }}>
         Your companion for mental wellbeing and personal growth
       </Text>
 

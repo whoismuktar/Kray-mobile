@@ -11,7 +11,7 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SignUp" // change during auth
+        initialRouteName="Auth" // change during auth
         screenOptions={{
           headerShadowVisible: false,
           headerBackTitleVisible: false,
