@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import OnboardingScreen from "./src/screens/Onboarding"
+import AuthScreen from "./src/screens/Auth"
+import HeaderLeft from "./src/components/HeaderLeft";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +15,10 @@ export default function Navigator() {
           headerShadowVisible: false,
           headerBackTitleVisible: false,
           headerTintColor: "#000000",
+          headerBackTitleVisible: false,
           title: "",
           headerTitleAlign: "center",
-          // headerLeft: () => <HeaderLeft />,
+          headerLeft: () => <HeaderLeft />,
           headerTitleStyle: {
             // color: baseStyle.textBlack,
             fontWeight: "bold",
@@ -27,6 +30,14 @@ export default function Navigator() {
           name="Onboarding"
           component={OnboardingScreen}
           options={{
+            // headerShown: false,
+          }}
+          />
+        <Stack.Screen
+          name="Auth"
+          component={AuthScreen}
+          options={{
+            
             // headerShown: false,
           }}
         />

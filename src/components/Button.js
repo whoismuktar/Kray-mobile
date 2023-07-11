@@ -16,7 +16,6 @@ function Button(props) {
     <View>
       <Pressable
         style={[
-          styles.btn,
           btnStyle[btnType] || btnStyle.pryBtn,
           props.loader && btnStyle.btnDisabled,
           props.style, // must be last item
@@ -37,7 +36,7 @@ function Button(props) {
           <View style={btnStyle.hasIcon.iconLeft}>{props.icon}</View>
         )}
 
-        <Text style={[btnStyle.hasIcon.btnText, styles.btnText, props.btnTextStyle]}>
+        <Text style={[styles.btnText, props.btnTextStyle,]}>
           {props.text}
         </Text>
       </Pressable>
@@ -46,13 +45,11 @@ function Button(props) {
 }
 
 const styles = StyleSheet.create({
-  btn: {
-    ...btnStyle.hasIcon,
-    // ...btnStyle.hasIcon.isPry,
-    marginBottom: 23,
-  },
   btnText: {
-    color: "#ffffff"
+    color: btnStyle.textWhite,
+    fontWeight: "bold",
+    color: "#ffffff",
+    textAlign: "center",
   }
 });
 
