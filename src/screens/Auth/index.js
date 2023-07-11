@@ -5,8 +5,11 @@ import Logo from "../../assets/images/randomLogo.png";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { Pressable as Presser } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 function Auth(props) {
+  const navigation = useNavigation();
+
   return (
     <View style={baseStyle.page}>
       <ImageBackground
@@ -56,6 +59,7 @@ function Auth(props) {
         <Button
           type="textBtn"
           text="Login"
+          onPress={()=> navigation.navigate("Login")}
           btnTextStyle={{ 
             color: "#000",
           padding: 0,

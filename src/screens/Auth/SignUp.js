@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
+  ImageBackground,
   Keyboard,
   Pressable,
   ScrollView,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import Checkbox from "expo-checkbox";
 import { baseStyle } from "../../assets/styles/base";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
@@ -17,6 +19,8 @@ import {
   EyeIcon,
   EyeSlashIcon,
 } from "react-native-heroicons/solid";
+import AltAuth from "../../components/AltAuth";
+import { useNavigation } from "@react-navigation/native";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -25,27 +29,30 @@ const HideKeyboard = ({ children }) => (
 );
 
 const SignUp = () => {
+  const navigation = useNavigation();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const onChangePassword = (text) => setPassword(text);
+  const onChangeConfirmPassword = (text) => setConfirmPassword(text);
 
   return (
     <HideKeyboard>
-      <ScrollView style={baseStyle.page}>
+      <ScrollView showsVerticalScrollIndicator={false} style={baseStyle.page}>
         <View style={baseStyle.section}>
           <Text weight="medium" type="header1">
             Create Account
           </Text>
           <Text type="paragraph4">Enter your personal details</Text>
         </View>
-
         <View style={baseStyle.inputWrapper}>
           <Text weight="medium" type="paragraph3">
             First Name
@@ -58,7 +65,6 @@ const SignUp = () => {
             value={firstName}
           />
         </View>
-
         <View style={baseStyle.inputWrapper}>
           <Text weight="medium" type="paragraph3">
             Last Name
@@ -92,7 +98,7 @@ const SignUp = () => {
             icon={<LockClosedIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
             placeholder="Input Text"
-            onChangeText={setPassword}
+            onChangeText={onChangePassword}
             value={password}
           />
           <Pressable
@@ -127,7 +133,7 @@ const SignUp = () => {
           <Input
             icon={<LockClosedIcon color={baseStyle.gray500} size={20} />}
             hasLeftIcon
-            onChangeText={onChangePassword}
+            onChangeText={onChangeConfirmPassword}
             secureTextEntry={!showConfirmPassword}
             textContentType={"password"}
             placeholder="Confirm new password"
@@ -157,6 +163,54 @@ const SignUp = () => {
               )}
             </>
           </Pressable>
+        </View>
+        <View
+          style={[
+            baseStyle.inputWrapper,
+            { flexDirection: "row", alignItems: "center" },
+          ]}
+        >
+          <Checkbox
+            style={{ marginRight: 10 }}
+            value={isTermsAccepted}
+            onValueChange={setIsTermsAccepted}
+            color={isTermsAccepted ? baseStyle.pryColor : undefined}
+          />
+          <Text weight="medium">Terms & Conditions and Privacy Policy</Text>
+        </View>
+        <View style={baseStyle.section}>
+          <Button disabled={true} text="Create Account" />
+        </View>
+        <View>
+          <AltAuth />
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 20,
+            paddingBottom: 60,
+          }}
+        >
+          <Text style={{}}>Already have an account? </Text>
+
+          <Button
+            type="textBtn"
+            text="Login"
+            onPress={() => navigation.navigate("Login")}
+            btnTextStyle={{
+              color: "#000",
+              padding: 0,
+              margin: 0,
+            }}
+            style={{
+              width: "auto",
+              padding: 0,
+              margin: 0,
+            }}
+          />
         </View>
       </ScrollView>
     </HideKeyboard>
