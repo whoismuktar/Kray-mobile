@@ -3,6 +3,7 @@ export const baseStyle = {
   gray50: "#F9FAFB",
   gray200: "#E5E7EB",
   gray300: "#D1D5DB",
+  gray400: "#9CA3AF",
   gray500: "#6B7280",
   black: "#2B2C2C",
   white: "#FFFFFF",

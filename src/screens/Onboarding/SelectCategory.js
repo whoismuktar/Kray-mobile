@@ -40,13 +40,14 @@ function SelectCategory({ navigation }) {
         <Text type="paragraph4">Select topics of interest</Text>
       </View>
 
-      <View>
+      <View style={{ flex: 0.8 }}>
         <FlatList
           // contentContainerStyle={{flexDirection : "row", flexWrap : "wrap"}}
           keyExtractor={(item, index) => index}
           data={categories}
           extraData={refreshList}
           numColumns={3}
+          // style={{flex: 0.8}}
           renderItem={({ item, index }) => (
             <Chip
               multiple
@@ -62,7 +63,7 @@ function SelectCategory({ navigation }) {
         />
       </View>
 
-      <View style={{ flex: 0.8 }}></View>
+      {/* <View style={{ flex: 0.8 }}></View> */}
 
       <Button
         text="Continue"
