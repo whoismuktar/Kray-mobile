@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 function HeaderLeft(props) {
   const navigation = useNavigation();
-  const propIcon = props.iwcon;
+  const propIcon = props.icon;
 
   return (
     <Pressable style={styles.goBackIcon} onPress={() => navigation.goBack()}>

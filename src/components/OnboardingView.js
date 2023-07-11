@@ -42,7 +42,7 @@ const OnboardingView = (props) => {
         <Stepper />
         <Pressable
           style={{ marginRight: 20 }}
-          onPress={navigation.navigate("Auth")}
+          onPress={()=> navigation.navigate("Auth")}
         >
           <Text>SKIP</Text>
         </Pressable>

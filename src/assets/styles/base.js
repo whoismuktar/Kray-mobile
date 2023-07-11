@@ -1,6 +1,9 @@
 export const baseStyle = {
   pryColor: "#1F2A37",
+  gray50: "#F9FAFB",
   gray200: "#E5E7EB",
+  gray300: "#D1D5DB",
+  gray500: "#6B7280",
   black: "#2B2C2C",
   white: "#FFFFFF",
   allChildrenCenter: {
@@ -23,6 +26,9 @@ export const baseStyle = {
     // paddingHorizontal: 20,
     // backgroundColor: "#fffffff"
   },
+  inputWrapper: {
+    marginBottom: 20,
+  },
   section: {
     marginVertical: 20,
 
@@ -41,8 +47,8 @@ export const baseStyle = {
 };
 
 export const inputStyle = {
-  backgroundColor: "#F1F1F1",
-  height: 53,
+  backgroundColor: baseStyle.gray50,
+  height: 40,
   paddingVertical: 10,
   paddingHorizontal: 5,
   marginTop: 12,
@@ -53,7 +59,7 @@ export const inputStyle = {
 
 export const textBase = {
   fontFamily: "Inter-Regular",
-  fontSize: 13,
+  fontSize: 15,
 };
 
 export const textStyle = {
@@ -63,10 +69,18 @@ export const textStyle = {
   
   error: {
     color: "red",
-    fontSize: 13,
+    fontSize: 15,
   },
   header1: {
-    fontSize: 18,
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  paragraph3: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  paragraph4: {
+    fontSize: 14,
     marginBottom: 10,
   },
 };
@@ -109,7 +123,7 @@ export const btnStyle = {
   greyBtn: {
     ...btnBase,
     backgroundColor: "#F1F1F1",
-    color: baseStyle.grey1Color,
+    // color: baseStyle.grey1Color,
   },
   textBtn: {
     textAlign: "center",

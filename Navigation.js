@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import OnboardingScreen from "./src/screens/Onboarding"
 import AuthScreen from "./src/screens/Auth"
+import SignUpScreen from "./src/screens/Auth/SignUp"
 import HeaderLeft from "./src/components/HeaderLeft";
 
 const Stack = createNativeStackNavigator();
@@ -10,7 +11,7 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Onboarding" // change during auth
+        initialRouteName="SignUp" // change during auth
         screenOptions={{
           headerShadowVisible: false,
           headerBackTitleVisible: false,
@@ -36,10 +37,12 @@ export default function Navigator() {
         <Stack.Screen
           name="Auth"
           component={AuthScreen}
-          options={{
-            
-            // headerShown: false,
-          }}
+          options={{}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpScreen}
+          options={{}}
         />
       </Stack.Navigator>
     </NavigationContainer>
