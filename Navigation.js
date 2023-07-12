@@ -1,8 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeIcon } from "react-native-heroicons/solid";
-import { HomeIcon as HomeIconOut } from "react-native-heroicons/outline";
+import {
+  HomeIcon,
+  MapIcon,
+  TableCellsIcon,
+  ChatBubbleLeftRightIcon,
+} from "react-native-heroicons/solid";
+import {
+  HomeIcon as HomeIconOut,
+  MapIcon as MapIconOut,
+  TableCellsIcon as TableCellsIconOut,
+  ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconOut,
+} from "react-native-heroicons/outline";
 import OnboardingScreen from "./src/screens/Onboarding";
 import AuthScreen from "./src/screens/Auth";
 import HeaderLeft from "./src/components/HeaderLeft";
@@ -13,6 +23,9 @@ import ForgotPasswordScreen from "./src/screens/Auth/ForgotPassword";
 import ChangePasswordScreen from "./src/screens/Auth/ChangePassword";
 import SelectActivityScreen from "./src/screens/Onboarding/SelectActivity";
 import HomeScreen from "./src/screens/Home";
+import ExploreScreen from "./src/screens/Explore";
+import PlansScreen from "./src/screens/Plans";
+import BookingsScreen from "./src/screens/Bookings";
 import { baseStyle } from "./src/assets/styles/base";
 
 const Stack = createNativeStackNavigator();
@@ -27,8 +40,13 @@ function MainNav() {
           fontSize: 13,
           textTransform: "capitalize",
           color: baseStyle.textBlack,
-          fontWeight: "500"
+          fontWeight: "500",
         },
+        tabBarStyle: {
+          paddingTop: 10,
+          paddingBottom: 30,
+        },
+
         // headerShadowVisible: false,
         // headerTintColor: "#000000",
         // title: "",
@@ -56,56 +74,56 @@ function MainNav() {
             ),
         }}
       />
-      {/* <BottomTab.Screen
+      <BottomTab.Screen
         name="Explore"
         component={ExploreScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Explore",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? "compass-3-fill" : "compass-3-line"}
-              size="23"
-              color={focused ? baseStyle.pryColor : baseStyle.grey1Color}
-            ></Icon>
-          ),
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <MapIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <MapIconOut color={baseStyle.pryColor} size={26} />
+            ),
         }}
-      /> */}
-      {/* <BottomTab.Screen
-        name="Event"
-        component={EventsTabsScreen}
+      />
+      <BottomTab.Screen
+        name="Plans"
+        component={PlansScreen}
         options={{
           headerRight: () => (
             <Pressable style={{ marginRight: 20 }}>
               <CreateEvent color="black" />
             </Pressable>
           ),
-          headerTitle: "Events",
-          tabBarLabel: "Events",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? "coupon-fill" : "coupon-line"}
-              size="23"
-              color={focused ? baseStyle.pryColor : baseStyle.grey1Color}
-            ></Icon>
-          ),
+          headerTitle: "Plans",
+          tabBarLabel: "Plans",
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <TableCellsIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <TableCellsIconOut color={baseStyle.pryColor} size={26} />
+            ),
         }}
-      /> */}
-      {/* <BottomTab.Screen
-        name="UserProfile"
-        component={HomeScreen}
+      />
+      <BottomTab.Screen
+        name="Bookings"
+        component={BookingsScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Profile",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? "user-3-fill" : "user-3-line"}
-              size="23"
-              color={focused ? baseStyle.pryColor : baseStyle.grey1Color}
-            ></Icon>
-          ),
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <ChatBubbleLeftRightIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <ChatBubbleLeftRightIconOut
+                color={baseStyle.pryColor}
+                size={26}
+              />
+            ),
         }}
-      /> */}
+      />
     </BottomTab.Navigator>
   );
 }
