@@ -16,10 +16,10 @@ function Chip(props) {
 
     if (props.multiple) {
       props.refreshList && props.setRefreshList(!props.refreshList);
-      props.selectMultipleCategories(props.id);
+      props.selectMultipleActivities(props.id);
     } else {
       // default
-      const selectCategory = navigation.navigate("Category", {
+      const selectActivity = navigation.navigate("Activity", {
         category: props.id,
       });
     }

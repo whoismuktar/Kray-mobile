@@ -78,10 +78,12 @@ export const textStyle = {
   },
   paragraph3: {
     fontSize: 16,
-    marginBottom: 10,
   },
   paragraph4: {
     fontSize: 14,
+  },
+  paragraph5: {
+    fontSize: 10,
   },
 };
 

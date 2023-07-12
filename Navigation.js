@@ -1,14 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import OnboardingScreen from "./src/screens/Onboarding"
-import AuthScreen from "./src/screens/Auth"
+import OnboardingScreen from "./src/screens/Onboarding";
+import AuthScreen from "./src/screens/Auth";
 import HeaderLeft from "./src/components/HeaderLeft";
-import SignUpScreen from "./src/screens/Auth/SignUp"
-import LoginScreen from "./src/screens/Auth/Login"
-import RegisterVerificationScreen from "./src/screens/Auth/RegisterVerification"
+import SignUpScreen from "./src/screens/Auth/SignUp";
+import LoginScreen from "./src/screens/Auth/Login";
+import RegisterVerificationScreen from "./src/screens/Auth/RegisterVerification";
 import ForgotPasswordScreen from "./src/screens/Auth/ForgotPassword";
-import ChangePasswordScreen from "./src/screens/Auth/ChangePassword"
-import SelectCategoryScreen from "./src/screens/Onboarding/SelectCategory"
+import ChangePasswordScreen from "./src/screens/Auth/ChangePassword";
+import SelectActivityScreen from "./src/screens/Onboarding/SelectActivity";
+import HomeScreen from "./src/screens/Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,7 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SelectCategory" // change during auth
+        initialRouteName="Home" // change during auth
         screenOptions={{
           headerShadowVisible: false,
           headerBackTitleVisible: false,
@@ -35,25 +36,15 @@ export default function Navigator() {
         <Stack.Screen
           name="Onboarding"
           component={OnboardingScreen}
-          options={{
-            // headerShown: false,
-          }}
-          />
-        <Stack.Screen
-          name="Auth"
-          component={AuthScreen}
-          options={{}}
+          options={
+            {
+              // headerShown: false,
+            }
+          }
         />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{}}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{}}
-        />
+        <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{}} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{}} />
         <Stack.Screen
           name="RegisterVerification"
           component={RegisterVerificationScreen}
@@ -70,9 +61,16 @@ export default function Navigator() {
           options={{}}
         />
         <Stack.Screen
-          name="SelectCategory"
-          component={SelectCategoryScreen}
+          name="SelectActivity"
+          component={SelectActivityScreen}
           options={{}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

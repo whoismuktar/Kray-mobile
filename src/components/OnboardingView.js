@@ -12,10 +12,8 @@ import { deviceWidth } from "../utils/helpers";
 import MoonImg from "../assets/images/moon-earth.png";
 import Text from "./Text";
 import Button from "./Button";
-import Svg from "./Svg";
 import { setOnboardingCurrentStage } from "../../redux/app";
 
-// import SvgUri from "react-native-svg-uri";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 

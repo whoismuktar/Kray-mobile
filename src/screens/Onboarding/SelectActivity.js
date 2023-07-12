@@ -3,18 +3,18 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { baseStyle, textStyle } from "../../assets/styles/base";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setUserCategories } from "../../../redux/app";
+import { setUserActivities } from "../../../redux/app";
 import Chip from "../../components/Chip";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 
-function SelectCategory({ navigation }) {
+function SelectActivity({ navigation }) {
   const dispatch = useDispatch();
-  const { categories, userCategories } = useSelector((state) => state.app);
-  const [selection, setSelection] = useState(userCategories);
+  const { activities, userActivities } = useSelector((state) => state.app);
+  const [selection, setSelection] = useState(userActivities);
   const [refreshList, setRefreshList] = useState(false);
 
-  const selectMultipleCategories = (id) => {
+  const selectMultipleActivities = (id) => {
     const alreadySelectedIdx = selection.findIndex((cat) => cat.id === id);
 
     if (alreadySelectedIdx !== -1) {
@@ -24,11 +24,11 @@ function SelectCategory({ navigation }) {
       setSelection(newSelection);
       return;
     }
-    const selected = categories.find((cat) => cat.id === id);
+    const selected = activities.find((cat) => cat.id === id);
     setSelection((selection) => [...selection, selected]);
 
-    // dispatch(setUserCategories([...userCategories, selected]))
-    // console.log(userCategories);
+    // dispatch(setUserActivities([...userActivities, selected]))
+    // console.log(userActivities);
   };
 
   return (
@@ -44,7 +44,7 @@ function SelectCategory({ navigation }) {
         <FlatList
           // contentContainerStyle={{flexDirection : "row", flexWrap : "wrap"}}
           keyExtractor={(item, index) => index}
-          data={categories}
+          data={activities}
           extraData={refreshList}
           numColumns={3}
           // style={{flex: 0.8}}
@@ -55,7 +55,7 @@ function SelectCategory({ navigation }) {
               selection={selection}
               text={item.name}
               id={item.id}
-              selectMultipleCategories={selectMultipleCategories}
+              selectMultipleActivities={selectMultipleActivities}
               setRefreshList={setRefreshList}
               refreshList={refreshList}
             />
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectCategory;
+export default SelectActivity;
