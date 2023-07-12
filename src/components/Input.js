@@ -8,6 +8,7 @@ function Input(props) {
   const hasIcon = props.icon;
 
   const Icon = () => props.icon;
+  const RightIcon = () => props.rightIcon;
 
   return (
     <View
@@ -33,7 +34,7 @@ function Input(props) {
 
       {hasIcon && hasRightIcon && (
         <View style={{ marginRight: 0, alignSelf: "center" }}>
-          <Icon />
+          {props.rightIcon ? <RightIcon /> : <Icon />}
         </View>
       )}
     </View>
@@ -68,6 +69,8 @@ const styles = StyleSheet.create({
   hasLeftIcon: {
     paddingLeft: 15,
   },
-  hasRightIcon: {},
+  hasRightIcon: {
+    paddingRight: 20
+  },
 });
 export default Input;
