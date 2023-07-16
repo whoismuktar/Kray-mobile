@@ -1,13 +1,17 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import {
   HomeIcon,
   MapIcon,
   TableCellsIcon,
   ChatBubbleLeftRightIcon,
-  BellIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
@@ -39,6 +43,18 @@ import UserCard from "./src/components/UserCard";
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
+function DrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      {/* <DrawerItemList {...props} /> */}
+      <DrawerItem
+        label="Help"
+        onPress={() => Linking.openURL("https://mywebsite.com/help")}
+      />
+    </DrawerContentScrollView>
+  );
+}
 
 function BottomNav() {
   return (
@@ -144,15 +160,17 @@ function BottomNav() {
 function DrawerNav() {
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <DrawerContent {...props} />}
       initialRouteName="Home" // change during auth
+      // initialRouteName="Onboarding" // change during auth
       screenOptions={{
         drawerType: "front",
+        headerShown: false,
       }}
     >
       <Drawer.Screen
         name="Home"
         options={{
-          headerShown: false,
           title: "",
           // headerLeft: () => <UserCard showName />,
           // headerRight: () => <BellIcon color={baseStyle.pryColor} />
@@ -163,6 +181,46 @@ function DrawerNav() {
       <Drawer.Screen name="Notification" component={NotificationScreen} />
       <Drawer.Screen name="Analytics" component={AnalyticsScreen} />
       <Drawer.Screen name="Settings" component={SettingsScreen} />
+
+      <Stack.Screen
+        name="Main"
+        component={BottomNav}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={
+          {
+            // headerShown: false,
+          }
+        }
+      />
+      <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} options={{}} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{}} />
+      <Stack.Screen
+        name="RegisterVerification"
+        component={RegisterVerificationScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="SelectActivity"
+        component={SelectActivityScreen}
+        options={{}}
+      />
     </Drawer.Navigator>
   );
 }
@@ -171,63 +229,6 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <DrawerNav />
-      {/* <Stack.Navigator
-        initialRouteName="Main" // change during auth
-        screenOptions={{
-          headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: "#000000",
-          headerBackTitleVisible: false,
-          title: "",
-          headerTitleAlign: "center",
-          headerLeft: () => <HeaderLeft />,
-          headerTitleStyle: {
-            // color: baseStyle.textBlack,
-            fontWeight: "bold",
-            fontSize: 22,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="Main"
-          component={BottomNav}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Onboarding"
-          component={OnboardingScreen}
-          options={
-            {
-              // headerShown: false,
-            }
-          }
-        />
-        <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} options={{}} />
-        <Stack.Screen name="Login" component={LoginScreen} options={{}} />
-        <Stack.Screen
-          name="RegisterVerification"
-          component={RegisterVerificationScreen}
-          options={{}}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPasswordScreen}
-          options={{}}
-        />
-        <Stack.Screen
-          name="ChangePassword"
-          component={ChangePasswordScreen}
-          options={{}}
-        />
-        <Stack.Screen
-          name="SelectActivity"
-          component={SelectActivityScreen}
-          options={{}}
-        />
-      </Stack.Navigator> */}
     </NavigationContainer>
   );
 }
