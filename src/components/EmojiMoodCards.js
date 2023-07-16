@@ -29,7 +29,6 @@ function EmojiMoodCards(props) {
       <FlatList
         keyExtractor={(item, index) => index}
         data={moods}
-        // style={{ backgroundColor: "red" }}
         contentContainerStyle={{
           alignItems: "stretch",
           justifyContent: "space-between",

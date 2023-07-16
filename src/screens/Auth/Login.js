@@ -101,7 +101,11 @@ const SignUp = () => {
         </Text>
 
         <View style={baseStyle.section}>
-          <Button disabled={true} text="Log In" />
+          <Button
+            disabled={true}
+            text="Log In"
+            onPress={() => navigation.navigate("Main")}
+          />
         </View>
         <View>
           <AltAuth mode="login" />
