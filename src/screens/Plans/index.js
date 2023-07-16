@@ -104,13 +104,14 @@ function Plans(props) {
             keyExtractor={(item, index) => index}
             data={userPlans}
             vertical
-            // ItemSeparatorComponent={<View style={{ marginLeft: 10 }}></View>}
+            ItemSeparatorComponent={<View style={{ marginBottom: 20 }}></View>}
             contentContainerStyle={{
-              paddingTop: 20,
+              // paddingTop: 20,
               width: "90%",
               alignSelf: "center",
-              height: "100%",
+              // height: "100%",
               flexGrow: 1,
+              // backgroundColor: "red",
             }}
             renderItem={({ item, index }) => <PlanCard plan={item} />}
           />

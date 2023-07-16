@@ -1,4 +1,10 @@
-import { FlatList, ScrollView, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { baseStyle } from "../../assets/styles/base";
 import UserCard from "../../components/UserCard";
 import Text from "../../components/Text";
@@ -6,9 +12,11 @@ import { BellIcon } from "react-native-heroicons/solid";
 import EmojiMoodCards from "../../components/EmojiMoodCards";
 import MoodCard from "../../components/MoodCard";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 function Home(props) {
   const { userActivities } = useSelector((state) => state.user);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.page}>
@@ -20,7 +28,8 @@ function Home(props) {
           paddingBottom: 10,
         }}
       >
-        <UserCard showName />
+        <UserCard showName iconOnPress={() => navigation.openDrawer()} />
+
         <BellIcon color={baseStyle.pryColor} />
       </View>
 

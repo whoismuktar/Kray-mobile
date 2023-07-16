@@ -2,12 +2,12 @@ import { View } from "react-native";
 import Text from "../../components/Text";
 import { baseStyle } from "../../assets/styles/base";
 
-const Explore = () => {
+const Profile = () => {
   return (
     <View style={baseStyle.page}>
-      <Text>Explore</Text>
+      <Text>My Profile</Text>
     </View>
   );
 };
 
-export default Explore;
+export default Profile;
