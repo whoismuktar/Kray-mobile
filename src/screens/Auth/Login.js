@@ -36,7 +36,10 @@ const SignUp = () => {
 
   return (
     <HideKeyboard>
-      <ScrollView showsVerticalScrollIndicator={false} style={baseStyle.page}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}
+      >
         <View style={baseStyle.section}>
           <Text weight="medium" type="header1">
             Welcome Back

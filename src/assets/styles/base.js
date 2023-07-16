@@ -22,6 +22,9 @@ export const baseStyle = {
     padding: 20,
     backgroundColor: "#ffffff",
     flex: 1,
+    noHeader: {
+      paddingTop: 80
+    }
   },
   pageNav: {
     height: 400,
@@ -53,7 +56,7 @@ export const baseStyle = {
     elevation: 4,
     shadowOpacity: 0.2,
     shadowRadius: 1,
-    shadowColor: this.pur,
+    // shadowColor: this.pur,
     shadowOffset: {
       width: 0,
       height: 0,

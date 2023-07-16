@@ -4,7 +4,7 @@ import { baseStyle } from "../../assets/styles/base";
 
 const Explore = () => {
   return (
-    <View style={baseStyle.page}>
+    <View style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}>
       <Text>Explore</Text>
     </View>
   );

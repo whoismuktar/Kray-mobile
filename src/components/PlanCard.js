@@ -11,7 +11,7 @@ const PlanCard = ({ plan }) => {
     <View
       style={{
         flexDirection: "row",
-        marginBottom: 30,
+        // marginBottom: 30,
         padding: 20,
         borderWidth: 1,
         borderColor: baseStyle.purple200,

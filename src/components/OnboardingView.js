@@ -30,7 +30,7 @@ const OnboardingView = (props) => {
   };
 
   return (
-    <View style={baseStyle.page}>
+    <View style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}>
       <View
         style={{
           flexDirection: "row",
@@ -40,7 +40,7 @@ const OnboardingView = (props) => {
         <Stepper />
         <Pressable
           style={{ marginRight: 20 }}
-          onPress={()=> navigation.navigate("Auth")}
+          onPress={() => navigation.navigate("Auth")}
         >
           <Text>SKIP</Text>
         </Pressable>

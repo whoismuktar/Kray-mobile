@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import { baseStyle } from "../assets/styles/base";
 import { getFullName } from "../utils/helpers";
@@ -12,15 +12,17 @@ function UserCard(props) {
 
   return (
     <View style={styles.userCard}>
-      <ImageBackground
-        source={randomLogo}
-        objectFit="contain"
-        style={[
-          styles.profileImage,
-          aviWidth && { width: aviWidth },
-          aviHeight && { height: aviHeight },
-        ]}
-      ></ImageBackground>
+      <Pressable onPress={props.iconOnPress && props.iconOnPress}>
+        <ImageBackground
+          source={randomLogo}
+          objectFit="contain"
+          style={[
+            styles.profileImage,
+            aviWidth && { width: aviWidth },
+            aviHeight && { height: aviHeight },
+          ]}
+        ></ImageBackground>
+      </Pressable>
       {props.showName && (
         <Text style={styles.userName}>Hi {getFullName(user)}</Text>
       )}

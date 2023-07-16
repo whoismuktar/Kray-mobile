@@ -11,7 +11,7 @@ function Auth(props) {
   const navigation = useNavigation();
 
   return (
-    <View style={baseStyle.page}>
+    <View style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}>
       <Logo width="100%" height={160} />
 
       <Text
@@ -40,9 +40,7 @@ function Auth(props) {
           // height: 5,
         }}
       >
-        <Text style={{ }}>
-          Already have an account?{" "}
-        </Text>
+        <Text style={{}}>Already have an account? </Text>
 
         {/* <Presser
         >
@@ -52,13 +50,13 @@ function Auth(props) {
         <Button
           type="textBtn"
           text="Login"
-          onPress={()=> navigation.navigate("Login")}
-          btnTextStyle={{ 
+          onPress={() => navigation.navigate("Login")}
+          btnTextStyle={{
             color: "#000",
-          padding: 0,
-          margin: 0,
-          // height: 1,
-         }}
+            padding: 0,
+            margin: 0,
+            // height: 1,
+          }}
           style={{
             width: "auto",
             padding: 0,

@@ -56,39 +56,32 @@ const initialState = {
       description: "Sleeper",
       description: "Sleeper",
       unit: "time",
-      unitAmount: "10 mins"
+      unitAmount: "10 mins",
     },
     {
       title: "Sleep",
       description: "Sleeper",
       description: "Sleeper",
       unit: "time",
-      unitAmount: "10 mins"
+      unitAmount: "10 mins",
     },
     {
       title: "Sleep",
       description: "Sleeper",
       description: "Sleeper",
       unit: "time",
-      unitAmount: "10 mins"
+      unitAmount: "10 mins",
     },
   ],
 };
 
 export const appSlice = createSlice({
-  name: "app",
+  name: "user",
   initialState,
-  reducers: {
-    setOnboardingCurrentStage: (state, action) => {
-      state.onboarding.currentStage = action.payload;
-    },
-    setUserPartyActivities: (state, action) => {
-      console.log({ state });
-    },
-  },
+  reducers: {},
 });
 
 // Action creators are generated for each case reducer function
-export const { setOnboardingCurrentStage } = appSlice.actions;
+export const {} = appSlice.actions;
 
 export default appSlice.reducer;
