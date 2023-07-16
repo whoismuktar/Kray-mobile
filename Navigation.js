@@ -17,6 +17,7 @@ import {
   BellIcon,
   ChartBarIcon,
   Cog8ToothIcon,
+  ArrowRightOnRectangleIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
@@ -46,7 +47,7 @@ import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
 import Text from "./src/components/Text";
-import { getFullName } from "./src/utils/helpers";
+import { deviceHeight, getFullName } from "./src/utils/helpers";
 import { useSelector } from "react-redux";
 
 const Stack = createNativeStackNavigator();
@@ -79,13 +80,20 @@ function DrawerContent(props) {
   ];
 
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} scrollEnabled={false}>
       {/* <DrawerItemList {...props} /> // default listing */}
       {/* <DrawerItem
         label="Help"
         onPress={() => Linking.openURL("https://mywebsite.com/help")}
       /> */}
-      <View style={{ padding: 20 }}>
+      <View
+        style={{
+          padding: 20,
+          backgroundColor: "white",
+          minHeight: deviceHeight - 150,
+          flex: 1,
+        }}
+      >
         <Pressable onPress={() => props.navigation.closeDrawer()}>
           <XMarkIcon color={baseStyle.black} size={32} />
         </Pressable>
@@ -136,6 +144,23 @@ function DrawerContent(props) {
               </Pressable>
             );
           })}
+        </View>
+
+        <View
+          style={{
+            position: "absolute",
+            bottom: 20,
+            left: 20,
+            width: "100%",
+          }}
+        >
+          <Pressable
+            style={{ flexDirection: "row", alignItems: "center" }}
+            onPress={() => props.navigation.navigate("Login")}
+          >
+            <ArrowRightOnRectangleIcon size={20} color={baseStyle.black} />
+            <Text style={{ marginLeft: 10 }}>Log Out</Text>
+          </Pressable>
         </View>
       </View>
     </DrawerContentScrollView>
