@@ -80,7 +80,7 @@ function DrawerContent(props) {
 
   return (
     <DrawerContentScrollView {...props}>
-      {/* <DrawerItemList {...props} /> */}
+      {/* <DrawerItemList {...props} /> // default listing */}
       {/* <DrawerItem
         label="Help"
         onPress={() => Linking.openURL("https://mywebsite.com/help")}
@@ -120,9 +120,10 @@ function DrawerContent(props) {
         </View>
 
         <View>
-          {menu.map((menu) => {
+          {menu.map((menu, i) => {
             return (
               <Pressable
+                key={i}
                 onPress={() => props.navigation.navigate(menu.path)}
                 style={{
                   flexDirection: "row",
@@ -176,8 +177,7 @@ function BottomNav() {
         component={HomeScreen}
         options={{
           headerShown: false,
-          // gestureEnabled: false,
-          // tabBarLabel: "Home",
+          gestureEnabled: true,
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <HomeIcon color={baseStyle.pryColor} size={26} />
@@ -247,41 +247,21 @@ function DrawerNav() {
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
       initialRouteName="Home" // change during auth
-      // initialRouteName="Onboarding" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
       }}
     >
-      <Drawer.Screen
-        name="Home"
-        options={{
-          title: "",
-          // headerLeft: () => <UserCard greetUser />,
-          // headerRight: () => <BellIcon color={baseStyle.pryColor} />
-        }}
-        component={BottomNav}
-      />
+      <Drawer.Screen name="Main" options={{}} component={BottomNav} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Notification" component={NotificationScreen} />
       <Drawer.Screen name="Analytics" component={AnalyticsScreen} />
       <Drawer.Screen name="Settings" component={SettingsScreen} />
 
       <Stack.Screen
-        name="Main"
-        component={BottomNav}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
         name="Onboarding"
         component={OnboardingScreen}
-        options={
-          {
-            // headerShown: false,
-          }
-        }
+        options={{}}
       />
       <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
       <Stack.Screen name="SignUp" component={SignUpScreen} options={{}} />
