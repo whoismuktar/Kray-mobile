@@ -1,11 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   HomeIcon,
   MapIcon,
   TableCellsIcon,
   ChatBubbleLeftRightIcon,
+  BellIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
@@ -26,16 +28,22 @@ import HomeScreen from "./src/screens/Home";
 import ExploreScreen from "./src/screens/Explore";
 import PlansScreen from "./src/screens/Plans";
 import BookingsScreen from "./src/screens/Bookings";
+import ProfileScreen from "./src/screens/Profile";
+import NotificationScreen from "./src/screens/Notification";
+import AnalyticsScreen from "./src/screens/Analytics";
+import SettingsScreen from "./src/screens/Settings";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable } from "react-native";
+import UserCard from "./src/components/UserCard";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-function MainNav() {
+function BottomNav() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Plans" // change during auth
+      initialRouteName="Home" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -66,6 +74,7 @@ function MainNav() {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           // gestureEnabled: false,
           // tabBarLabel: "Home",
           tabBarIcon: ({ focused, color, size }) =>
@@ -116,7 +125,7 @@ function MainNav() {
         component={BookingsScreen}
         options={{
           headerShown: false,
-          tabBarLabel: "Profile",
+          tabBarLabel: "Bookings",
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <ChatBubbleLeftRightIcon color={baseStyle.pryColor} size={26} />
@@ -132,10 +141,37 @@ function MainNav() {
   );
 }
 
+function DrawerNav() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home" // change during auth
+      screenOptions={{
+        drawerType: "front",
+      }}
+    >
+      <Drawer.Screen
+        name="Home"
+        options={{
+          headerShown: false,
+          title: "",
+          // headerLeft: () => <UserCard showName />,
+          // headerRight: () => <BellIcon color={baseStyle.pryColor} />
+        }}
+        component={BottomNav}
+      />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      <Drawer.Screen name="Notification" component={NotificationScreen} />
+      <Drawer.Screen name="Analytics" component={AnalyticsScreen} />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
+    </Drawer.Navigator>
+  );
+}
+
 export default function Navigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <DrawerNav />
+      {/* <Stack.Navigator
         initialRouteName="Main" // change during auth
         screenOptions={{
           headerShadowVisible: false,
@@ -154,7 +190,7 @@ export default function Navigator() {
       >
         <Stack.Screen
           name="Main"
-          component={MainNav}
+          component={BottomNav}
           options={{
             headerShown: false,
           }}
@@ -191,7 +227,7 @@ export default function Navigator() {
           component={SelectActivityScreen}
           options={{}}
         />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 }
