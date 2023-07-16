@@ -143,6 +143,25 @@ function DrawerContent(props) {
 }
 
 function BottomNav() {
+  const BottomLabel = ({ focused, title }) => {
+    return focused ? (
+      <Text
+        weight={focused && "bold"}
+        type="paragraph4"
+        style={{ marginBottom: -5, color: baseStyle.pryColor }}
+      >
+        {title}
+      </Text>
+    ) : (
+      <Text
+        weight={focused && "bold"}
+        type="paragraph4"
+        style={{ marginBottom: -5, color: baseStyle.pryColor }}
+      >
+        {title}
+      </Text>
+    );
+  };
   return (
     <BottomTab.Navigator
       initialRouteName="Home" // change during auth
@@ -151,7 +170,7 @@ function BottomNav() {
         tabBarLabelStyle: {
           fontSize: 13,
           textTransform: "capitalize",
-          color: baseStyle.textBlack,
+          color: baseStyle.pryColor,
           fontWeight: "500",
         },
         tabBarStyle: {
@@ -178,6 +197,10 @@ function BottomNav() {
         options={{
           headerShown: false,
           gestureEnabled: true,
+          tabBarLabelStyle: {},
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Home" />;
+          },
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <HomeIcon color={baseStyle.pryColor} size={26} />
@@ -192,6 +215,9 @@ function BottomNav() {
         options={{
           headerShown: false,
           tabBarLabel: "Explore",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Explore" />;
+          },
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <MapIcon color={baseStyle.pryColor} size={26} />
@@ -213,6 +239,9 @@ function BottomNav() {
           ),
           headerTitle: "Plans",
           tabBarLabel: "Plans",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Plans" />;
+          },
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <TableCellsIcon color={baseStyle.pryColor} size={26} />
@@ -227,6 +256,9 @@ function BottomNav() {
         options={{
           headerShown: false,
           tabBarLabel: "Bookings",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Bookings" />;
+          },
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <ChatBubbleLeftRightIcon color={baseStyle.pryColor} size={26} />

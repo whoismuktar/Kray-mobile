@@ -62,13 +62,7 @@ function Plans(props) {
                 color={baseStyle.gray500}
               />
             }
-            rightIcon={
-              <Button
-                text="Search"
-                minimal
-                style={{ backgroundColor: baseStyle.gray700 }}
-              />
-            }
+            rightIcon={<Button text="Search" minimal />}
             hasLeftIcon
             hasRightIcon
             placeholder="Search health professionals"

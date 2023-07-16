@@ -1,5 +1,5 @@
 export const baseStyle = {
-  pryColor: "#1F2A37",
+  pryColor: "#7E3AF2",
   gray50: "#F9FAFB",
   gray200: "#E5E7EB",
   gray300: "#D1D5DB",
