@@ -12,6 +12,11 @@ import {
   MapIcon,
   TableCellsIcon,
   ChatBubbleLeftRightIcon,
+  XMarkIcon,
+  UserCircleIcon,
+  BellIcon,
+  ChartBarIcon,
+  Cog8ToothIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
@@ -19,6 +24,7 @@ import {
   TableCellsIcon as TableCellsIconOut,
   ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconOut,
 } from "react-native-heroicons/outline";
+import randomLogo from "./src/assets/images/randomLogo.png";
 import OnboardingScreen from "./src/screens/Onboarding";
 import AuthScreen from "./src/screens/Auth";
 import HeaderLeft from "./src/components/HeaderLeft";
@@ -37,21 +43,100 @@ import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import { baseStyle } from "./src/assets/styles/base";
-import { Pressable } from "react-native";
+import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
+import Text from "./src/components/Text";
+import { getFullName } from "./src/utils/helpers";
+import { useSelector } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 function DrawerContent(props) {
+  const { user } = useSelector((state) => state.user);
+  const menu = [
+    {
+      title: "Profile",
+      path: "Profile",
+      icon: <UserCircleIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Notification",
+      path: "Notification",
+      icon: <BellIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Analytics",
+      path: "Analytics",
+      icon: <ChartBarIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Settings",
+      path: "Settings",
+      icon: <Cog8ToothIcon color={baseStyle.black} size={20} />,
+    },
+  ];
+
   return (
     <DrawerContentScrollView {...props}>
       {/* <DrawerItemList {...props} /> */}
-      <DrawerItem
+      {/* <DrawerItem
         label="Help"
         onPress={() => Linking.openURL("https://mywebsite.com/help")}
-      />
+      /> */}
+      <View style={{ padding: 20 }}>
+        <Pressable onPress={() => props.navigation.closeDrawer()}>
+          <XMarkIcon color={baseStyle.black} size={32} />
+        </Pressable>
+
+        <Pressable
+          onPress={() => props.navigation.navigate("Main")}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 40,
+          }}
+        >
+          <ImageBackground
+            source={randomLogo}
+            objectFit="contain"
+            style={{ width: 35, height: 35, marginRight: 10 }}
+          ></ImageBackground>
+
+          <Text weight="bold" type="paragraph3">
+            KRAY
+          </Text>
+        </Pressable>
+
+        <View style={{ marginVertical: 40 }}>
+          <UserCard
+            vertical
+            nameOnly
+            name={getFullName(user)}
+            aviWidth={50}
+            aviHeight={50}
+          />
+        </View>
+
+        <View>
+          {menu.map((menu) => {
+            return (
+              <Pressable
+                onPress={() => props.navigation.navigate(menu.path)}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingVertical: 15,
+                }}
+              >
+                {menu.icon}
+                <Text style={{ marginLeft: 10 }}>{menu.title}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
     </DrawerContentScrollView>
   );
 }
@@ -172,7 +257,7 @@ function DrawerNav() {
         name="Home"
         options={{
           title: "",
-          // headerLeft: () => <UserCard showName />,
+          // headerLeft: () => <UserCard greetUser />,
           // headerRight: () => <BellIcon color={baseStyle.pryColor} />
         }}
         component={BottomNav}

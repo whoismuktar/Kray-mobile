@@ -9,9 +9,15 @@ function UserCard(props) {
   const { user } = useSelector((state) => state.user);
   const aviWidth = props.aviWidth;
   const aviHeight = props.aviHeight;
+  const isVertical = props.vertical;
 
   return (
-    <View style={styles.userCard}>
+    <View
+      style={[
+        styles.userCard,
+        isVertical && { flexDirection: "column" },
+      ]}
+    >
       <Pressable onPress={props.iconOnPress && props.iconOnPress}>
         <ImageBackground
           source={randomLogo}
@@ -20,12 +26,16 @@ function UserCard(props) {
             styles.profileImage,
             aviWidth && { width: aviWidth },
             aviHeight && { height: aviHeight },
+            isVertical && { marginBottom: 10 },
           ]}
         ></ImageBackground>
       </Pressable>
-      {props.showName && (
-        <Text style={styles.userName}>Hi {getFullName(user)}</Text>
+      {props.greetUser && (
+        <Text style={styles.userName}>
+          Hi {props.name || getFullName(user)}
+        </Text>
       )}
+      {props.nameOnly && <Text>{props.name || getFullName(user)}</Text>}
     </View>
   );
 }

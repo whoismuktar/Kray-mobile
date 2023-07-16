@@ -28,7 +28,7 @@ function Home(props) {
           paddingBottom: 10,
         }}
       >
-        <UserCard showName iconOnPress={() => navigation.openDrawer()} />
+        <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
 
         <BellIcon color={baseStyle.pryColor} />
       </View>
