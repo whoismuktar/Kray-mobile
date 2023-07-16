@@ -10,6 +10,8 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { MagnifyingGlassIcon } from "react-native-heroicons/solid";
 import { TextInput } from "react-native";
+import PlanCard from "../../components/PlanCard";
+import { useSelector } from "react-redux";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -18,6 +20,7 @@ const HideKeyboard = ({ children }) => (
 );
 
 function Plans(props) {
+  const { userPlans } = useSelector((state) => state.user);
   const filters = [
     {
       title: "All",
@@ -34,7 +37,7 @@ function Plans(props) {
     {
       title: "Completed",
       id: "completed",
-    }
+    },
   ];
 
   return (
@@ -73,7 +76,7 @@ function Plans(props) {
           />
         </View>
 
-        <View style={baseStyle.section}>
+        <View style={{}}>
           <FlatList
             keyExtractor={(item, index) => index}
             data={filters}
@@ -86,8 +89,30 @@ function Plans(props) {
               marginBottom: 20,
             }}
             renderItem={({ item, index }) => (
-              <Button text={item.title} type="outlinedBtn" minimal />
+              <Button
+                text={item.title}
+                type="outlinedBtn"
+                style={{ borderColor: baseStyle.gray200 }}
+                minimal
+              />
             )}
+          />
+        </View>
+
+        <View style={baseStyle.section["fullWidth"]}>
+          <FlatList
+            keyExtractor={(item, index) => index}
+            data={userPlans}
+            vertical
+            // ItemSeparatorComponent={<View style={{ marginLeft: 10 }}></View>}
+            contentContainerStyle={{
+              paddingTop: 20,
+              width: "90%",
+              alignSelf: "center",
+              height: "100%",
+              flexGrow: 1,
+            }}
+            renderItem={({ item, index }) => <PlanCard plan={item} />}
           />
         </View>
       </View>

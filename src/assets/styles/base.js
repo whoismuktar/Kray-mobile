@@ -6,6 +6,8 @@ export const baseStyle = {
   gray400: "#9CA3AF",
   gray500: "#6B7280",
   gray700: "#374151",
+  gray800: "#1F2A37",
+  purple200: "#DCD7FE",
   // gradieint1: linear-gradient(270deg, #2258B7 0%, rgba(32, 64, 119, 0.00) 100%),
   black: "#2B2C2C",
   white: "#FFFFFF",
@@ -47,6 +49,16 @@ export const baseStyle = {
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
+  boxShadow: {
+    elevation: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 1,
+    shadowColor: this.pur,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+  },
 };
 
 export const inputStyle = {
@@ -69,7 +81,7 @@ export const textStyle = {
   ...textBase,
   medium: { fontFamily: "Inter-Medium" },
   bold: { fontFamily: "Inter-Bold" },
-  
+
   error: {
     color: "red",
     fontSize: 15,
@@ -136,16 +148,16 @@ export const btnStyle = {
     alignSelf: "center",
     // fontWeight: "bold",
     textStyle: {
-      color: baseStyle.black
-    }
+      color: baseStyle.black,
+    },
   },
   outlinedBtn: {
     ...btnBase,
     borderColor: baseStyle.gray700,
     borderWidth: 1,
     textStyle: {
-      color: baseStyle.black
-    }
+      color: baseStyle.black,
+    },
   },
   minimal: {
     height: "auto",
