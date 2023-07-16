@@ -5,6 +5,8 @@ export const baseStyle = {
   gray300: "#D1D5DB",
   gray400: "#9CA3AF",
   gray500: "#6B7280",
+  gray700: "#374151",
+  // gradieint1: linear-gradient(270deg, #2258B7 0%, rgba(32, 64, 119, 0.00) 100%),
   black: "#2B2C2C",
   white: "#FFFFFF",
   allChildrenCenter: {
@@ -49,7 +51,7 @@ export const baseStyle = {
 
 export const inputStyle = {
   backgroundColor: baseStyle.gray50,
-  height: 40,
+  // height: 40,
   paddingVertical: 10,
   paddingHorizontal: 5,
   marginTop: 12,
@@ -96,9 +98,9 @@ const btnBase = {
   borderColor: "transparent",
   overflow: "hidden",
   marginBottom: 0,
-  fontWeight: "bold",
   marginTop: 25,
   height: 60,
+  fontWeight: "500",
 };
 
 export const btnStyle = {
@@ -132,15 +134,25 @@ export const btnStyle = {
     alignSelf: "center",
     textDecorationLine: "underline",
     alignSelf: "center",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textStyle: {
       color: baseStyle.black
     }
   },
   outlinedBtn: {
     ...btnBase,
-    borderColor: baseStyle.grey2Color,
+    borderColor: baseStyle.gray700,
     borderWidth: 1,
+    textStyle: {
+      color: baseStyle.black
+    }
+  },
+  minimal: {
+    height: "auto",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
+    marginTop: 0,
   },
   btnDisabled: {
     opacity: 0.5,

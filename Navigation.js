@@ -27,6 +27,7 @@ import ExploreScreen from "./src/screens/Explore";
 import PlansScreen from "./src/screens/Plans";
 import BookingsScreen from "./src/screens/Bookings";
 import { baseStyle } from "./src/assets/styles/base";
+import { Pressable } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ const BottomTab = createBottomTabNavigator();
 function MainNav() {
   return (
     <BottomTab.Navigator
+      initialRouteName="Plans" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -46,17 +48,17 @@ function MainNav() {
           paddingTop: 10,
           paddingBottom: 30,
         },
-
-        // headerShadowVisible: false,
-        // headerTintColor: "#000000",
-        // title: "",
-        // headerTitleAlign: "center",
-        // headerLeft: () => <HeaderLeft />,
-        // headerTitleStyle: {
-        //   color: baseStyle.textBlack,
-        //   fontWeight: "bold",
-        //   fontSize: 22,
-        // },
+        headerStyle: {
+          elevation: 0, // remove shadow on Android
+          shadowOpacity: 0, // remove shadow on iOS
+          borderBottomWidth: 0, // Just in case.
+        },
+        headerTitleAlign: "left",
+        headerTitleStyle: {
+          color: baseStyle.textBlack,
+          fontWeight: "500",
+          fontSize: 20,
+        },
         headerShown: false,
       }}
     >
@@ -92,9 +94,11 @@ function MainNav() {
         name="Plans"
         component={PlansScreen}
         options={{
+          headerShown: !false,
+          headerLeft: () => <HeaderLeft />,
           headerRight: () => (
             <Pressable style={{ marginRight: 20 }}>
-              <CreateEvent color="black" />
+              {/* <CreateEvent color="black" /> */}
             </Pressable>
           ),
           headerTitle: "Plans",
