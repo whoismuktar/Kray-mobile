@@ -111,7 +111,7 @@ const SignUp = () => {
           />
         </View>
         <View>
-          <AltAuth mode="login" />
+          <AltAuth mode="signUp" />
         </View>
 
         <View

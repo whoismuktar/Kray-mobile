@@ -182,7 +182,7 @@ const SignUp = () => {
           <Button disabled={true} text="Create Account" />
         </View>
         <View>
-          <AltAuth />
+          <AltAuth mode="login" />
         </View>
 
         <View
