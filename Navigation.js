@@ -43,6 +43,7 @@ import ProfileScreen from "./src/screens/Profile";
 import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
+import NewGoalScreen from "./src/screens/Goals/New";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
@@ -189,7 +190,7 @@ function BottomNav() {
   };
   return (
     <BottomTab.Navigator
-      initialRouteName="Home" // change during auth
+      initialRouteName="Login" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -303,7 +304,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Home" // change during auth
+      initialRouteName="NewGoal" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -342,6 +343,16 @@ function DrawerNav() {
         name="SelectActivity"
         component={SelectActivityScreen}
         options={{}}
+      />
+      <Stack.Screen
+        name="NewGoal"
+        component={NewGoalScreen}
+        options={{
+          headerShown: !false,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Create New Goal",
+          headerTitleAlign: "left",
+        }}
       />
     </Drawer.Navigator>
   );
