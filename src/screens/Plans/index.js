@@ -19,7 +19,7 @@ const HideKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-function Plans(props) {
+function Plans({navigation}) {
   const { userPlans } = useSelector((state) => state.user);
   const filters = [
     {
@@ -49,8 +49,14 @@ function Plans(props) {
             type="outlinedBtn"
             minimal
             style={{ marginRight: 20 }}
+            onPress={() => navigation.navigate("NewGoal")}
           />
-          <Button text="Create New Plan" type="outlinedBtn" minimal />
+          <Button
+            text="Create New Health Plan"
+            type="outlinedBtn"
+            minimal
+            onPress={() => navigation.navigate("NewPlan")}
+          />
         </View>
 
         <View style={{ marginVertical: 20 }}>

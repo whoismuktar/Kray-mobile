@@ -44,6 +44,7 @@ import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import NewGoalScreen from "./src/screens/Goals/New";
+import NewPlanScreen from "./src/screens/Plans/New";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
@@ -304,7 +305,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="NewGoal" // change during auth
+      initialRouteName="NewPlan" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -351,6 +352,16 @@ function DrawerNav() {
           headerShown: !false,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Create New Goal",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="NewPlan"
+        component={NewPlanScreen}
+        options={{
+          headerShown: !false,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Create New Plan",
           headerTitleAlign: "left",
         }}
       />
