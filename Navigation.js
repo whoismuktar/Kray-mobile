@@ -41,8 +41,8 @@ import PlansScreen from "./src/screens/Plans";
 import NewPlanScreen from "./src/screens/Plans/New";
 import PlanScreen from "./src/screens/Plans/Plan";
 import BookingsScreen from "./src/screens/Bookings";
-import BookScreen from "./src/screens/Bookings/Book";
 import NewBookingScreen from "./src/screens/Bookings/New";
+import BookingScreen from "./src/screens/Bookings/Booking";
 import ProfileScreen from "./src/screens/Profile";
 import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
@@ -196,7 +196,7 @@ function BottomNav() {
   };
   return (
     <BottomTab.Navigator
-      initialRouteName="Bookings" // change during auth
+      initialRouteName="Home" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -309,7 +309,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="NewBooking" // change during auth
+      initialRouteName="Onboarding" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -400,8 +400,8 @@ function DrawerNav() {
         }}
       />
       <Stack.Screen
-        name="Book"
-        component={BookScreen}
+        name="Booking"
+        component={BookingScreen}
         options={{
           headerShown: true,
           headerLeft: () => <HeaderLeft />,
