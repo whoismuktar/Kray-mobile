@@ -70,6 +70,7 @@ const PlanCard = ({ professional, id }) => {
           type="pryBtn"
           minimal
           style={{ marginTop: 10 }}
+          onPress={navigation.navigate("NewBooking", { profId: 2 })}
         />
       </View>
     </View>

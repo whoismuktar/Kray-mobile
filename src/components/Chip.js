@@ -19,9 +19,9 @@ function Chip(props) {
       props.selectMultipleActivities(props.id);
     } else {
       // default
-      const selectActivity = navigation.navigate("Activity", {
-        category: props.id,
-      });
+      // const selectActivity = navigation.navigate("Activity", {
+      //   category: props.id,
+      // });
     }
   };
 
