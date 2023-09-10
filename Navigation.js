@@ -193,7 +193,7 @@ function BottomNav() {
   };
   return (
     <BottomTab.Navigator
-      initialRouteName="Plans" // change during auth
+      initialRouteName="Bookings" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -259,8 +259,7 @@ function BottomNav() {
         name="Plans"
         component={PlansScreen}
         options={{
-          headerShown: !false,
-          headerLeft: () => <HeaderLeft />,
+          headerShown: true,
           headerRight: () => (
             <Pressable style={{ marginRight: 20 }}>
               {/* <CreateEvent color="black" /> */}
@@ -283,8 +282,8 @@ function BottomNav() {
         name="Bookings"
         component={BookingsScreen}
         options={{
-          headerShown: false,
-          tabBarLabel: "Bookings",
+          headerShown: true,
+          headerTitle: "Book Health Professionals",
           tabBarLabel: ({ focused, color, size }) => {
             return <BottomLabel focused={focused} title="Bookings" />;
           },
@@ -307,7 +306,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Plans" // change during auth
+      initialRouteName="Bookings" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,

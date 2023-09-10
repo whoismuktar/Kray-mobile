@@ -22,7 +22,7 @@ const PlanCard = ({ plan, id }) => {
         backgroundColor: baseStyle.white,
         ...baseStyle.boxShadow,
       }}
-      onPress={navigation.navigate("Plan", {
+      onPress={()=>navigation.navigate("Plan", {
         id,
       })}
     >

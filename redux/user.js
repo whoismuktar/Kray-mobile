@@ -73,6 +73,50 @@ const initialState = {
       unitAmount: "10 mins",
     },
   ],
+  professionals: [
+    {
+      prefix: "Dr",
+      firstName: "Alex",
+      lastName: "Morgan",
+      location: "London",
+      about:
+        "I am Alex Morgan, an experienced anxiety therapist dedicated to helping individuals find relief and empowerment in their mental health journey.",
+      availability: [
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+      ],
+      specialization: "Anxiety Therapist",
+      expYears: 8,
+    },
+    {
+      prefix: "Dr",
+      firstName: "Alex",
+      lastName: "Morgan",
+      location: "London",
+      about:
+        "I am Alex Morgan, an experienced anxiety therapist dedicated to helping individuals find relief and empowerment in their mental health journey.",
+      availability: [
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+      ],
+      specilization: "Anxiety Therapist",
+      expYears: 8,
+    },
+    {
+      prefix: "Dr",
+      firstName: "Alex",
+      lastName: "Morgan",
+      location: "London",
+      about:
+        "I am Alex Morgan, an experienced anxiety therapist dedicated to helping individuals find relief and empowerment in their mental health journey.",
+      availability: [
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+        "Mon-Wed ( 9:00 AM - 2:00 PM )",
+      ],
+      specilization: "Anxiety Therapist",
+      expYears: 8,
+    },
+  ],
 };
 
 export const appSlice = createSlice({

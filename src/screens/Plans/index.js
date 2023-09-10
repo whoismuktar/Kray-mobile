@@ -71,7 +71,7 @@ function Plans({navigation}) {
             rightIcon={<Button text="Search" minimal />}
             hasLeftIcon
             hasRightIcon
-            placeholder="Search health professionals"
+            placeholder="Search goals or health plans"
             style={{ paddingVertical: 17 }}
           />
         </View>
@@ -114,7 +114,7 @@ function Plans({navigation}) {
               // height: "100%",
               flexGrow: 1,
               // backgroundColor: "red",
-            }}
+          }}
             renderItem={({ item, index }) => <PlanCard plan={item} />}
           />
         </View>
