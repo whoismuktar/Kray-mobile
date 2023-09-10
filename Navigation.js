@@ -39,7 +39,7 @@ import HomeScreen from "./src/screens/Home";
 import ExploreScreen from "./src/screens/Explore";
 import PlansScreen from "./src/screens/Plans";
 import NewPlanScreen from "./src/screens/Plans/New";
-import Plan from "./src/screens/Plans/Plan";
+import PlanScreen from "./src/screens/Plans/Plan";
 import BookingsScreen from "./src/screens/Bookings";
 import ProfileScreen from "./src/screens/Profile";
 import NotificationScreen from "./src/screens/Notification";
@@ -47,6 +47,7 @@ import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import NewGoalScreen from "./src/screens/Goals/New";
 import GoalScreen from "./src/screens/Goals/Goal";
+import ProProfileScreen from "./src/screens/Professionals/ProProfile";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
@@ -306,7 +307,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Bookings" // change during auth
+      initialRouteName="ProProfile" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -378,11 +379,21 @@ function DrawerNav() {
       />
       <Stack.Screen
         name="Plan"
-        component={Plan}
+        component={PlanScreen}
         options={{
           headerShown: !false,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Plan Details",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="ProProfile"
+        component={ProProfileScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Profile",
           headerTitleAlign: "left",
         }}
       />

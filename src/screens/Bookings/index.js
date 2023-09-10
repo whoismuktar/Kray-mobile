@@ -39,22 +39,6 @@ function Bookings({navigation}) {
   return (
     <HideKeyboard>
       <View style={baseStyle.page}>
-        <View style={{ flexDirection: "row" }}>
-          <Button
-            text="Create New Goal"
-            type="outlinedBtn"
-            minimal
-            style={{ marginRight: 20 }}
-            onPress={() => navigation.navigate("NewGoal")}
-          />
-          <Button
-            text="Create New Health Plan"
-            type="outlinedBtn"
-            minimal
-            onPress={() => navigation.navigate("NewPlan")}
-          />
-        </View>
-
         <View style={{ marginVertical: 20 }}>
           <Input
             icon={
