@@ -5,8 +5,11 @@ import { CalendarIcon } from "react-native-heroicons/solid";
 import Text from "./Text";
 import Button from "./Button";
 import { baseStyle } from "../assets/styles/base";
+import { useNavigation } from "@react-navigation/core";
 
-const PlanCard = ({ plan }) => {
+const PlanCard = ({ plan, id }) => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -17,8 +20,11 @@ const PlanCard = ({ plan }) => {
         borderColor: baseStyle.purple200,
         borderRadius: 10,
         backgroundColor: baseStyle.white,
-        ...baseStyle.boxShadow
+        ...baseStyle.boxShadow,
       }}
+      onPress={navigation.navigate("Plan", {
+        id,
+      })}
     >
       <View style={{ flex: 1 }}>
         <Text type="paragraph3" style={{ marginBottom: 10 }}>
@@ -39,7 +45,7 @@ const PlanCard = ({ plan }) => {
         >
           <CalendarIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
           <Text type="paragraph4">
-            {`${plan.durationInterval}: ${plan.startDate} - ${plan.endDate}`}
+            {`${plan.timeline}: ${plan.startDate} - ${plan.endDate}`}
           </Text>
         </View>
       </View>

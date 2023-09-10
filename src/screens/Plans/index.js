@@ -105,8 +105,10 @@ function Plans({navigation}) {
             data={userPlans}
             vertical
             ItemSeparatorComponent={<View style={{ marginBottom: 20 }}></View>}
+            
             contentContainerStyle={{
               // paddingTop: 20,
+              paddingBottom: 120,
               width: "90%",
               alignSelf: "center",
               // height: "100%",

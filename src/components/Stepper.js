@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import { baseStyle } from "../assets/styles/base";
 import { useSelector } from "react-redux";
 
-function Stepper({ level }) {
+function Stepper({ level, color }) {
   const { onboarding } = useSelector((state) => state.app);
 
   return (
@@ -17,7 +17,7 @@ function Stepper({ level }) {
       <View
         style={{
           height: 10,
-          backgroundColor: baseStyle.pryColor,
+          backgroundColor: color || baseStyle.pryColor,
           width: `${(100 / onboarding.stages) * onboarding.currentStage}%`,
           borderRadius: 50,
         }}
