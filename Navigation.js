@@ -46,6 +46,7 @@ import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import NewGoalScreen from "./src/screens/Goals/New";
+import GoalScreen from "./src/screens/Goals/Goal";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
@@ -353,6 +354,16 @@ function DrawerNav() {
           headerShown: !false,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Create New Goal",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="Goal"
+        component={GoalScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Goal Details",
           headerTitleAlign: "left",
         }}
       />
