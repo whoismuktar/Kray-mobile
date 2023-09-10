@@ -41,6 +41,8 @@ import PlansScreen from "./src/screens/Plans";
 import NewPlanScreen from "./src/screens/Plans/New";
 import PlanScreen from "./src/screens/Plans/Plan";
 import BookingsScreen from "./src/screens/Bookings";
+import BookScreen from "./src/screens/Bookings/Book";
+import NewBookingScreen from "./src/screens/Bookings/New";
 import ProfileScreen from "./src/screens/Profile";
 import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
@@ -307,7 +309,7 @@ function DrawerNav() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="ProProfile" // change during auth
+      initialRouteName="NewBooking" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -394,6 +396,26 @@ function DrawerNav() {
           headerShown: true,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Profile",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="Book"
+        component={BookScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Session Booking",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="NewBooking"
+        component={NewBookingScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Booking Details",
           headerTitleAlign: "left",
         }}
       />

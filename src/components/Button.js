@@ -54,7 +54,7 @@ function Button(props) {
 const styles = StyleSheet.create({
   btnText: {
     color: btnStyle.textWhite,
-    // fontWeight: "bold",
+    fontWeight: "bold",
     color: "#ffffff",
     textAlign: "center",
   },
