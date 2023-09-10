@@ -7,6 +7,7 @@ import Stepper from "../../components/Stepper";
 import { CalendarIcon, CheckCircleIcon } from "react-native-heroicons/solid";
 import { useState } from "react";
 import Chip from "../../components/Chip";
+import { BriefcaseIcon, MapPinIcon } from "react-native-heroicons/outline";
 
 const booking = {
   id: 44,
@@ -33,19 +34,19 @@ const Plan = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={baseStyle.page}>
-      <View style={{ textAlign: "center" }}>
+      <View style={{ alignItems: "center" }}>
         <ImageBackground
           source={{
             uri: "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team2.jpg",
           }}
           imageStyle={{ borderRadius: "100%" }}
           resizeMode="cover"
-          style={{ width: 120, height: 120, marginTop: -70 }}
+          style={{ width: 120, height: 120, marginBottom: 20 }}
         ></ImageBackground>
       </View>
 
-      <Text type="paragraph3">
-        {`${professional.prefix}. ${professional.firstName} ${professional.lastName}`}
+      <Text type="paragraph3" style={{ marginBottom: 10 }}>
+        Dr Alex Morgan
       </Text>
       <View
         style={{
@@ -54,7 +55,7 @@ const Plan = () => {
         }}
       >
         <BriefcaseIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
-        <Text type="paragraph4">{`${proUser.specialization}`}</Text>
+        <Text type="paragraph4">Mental</Text>
       </View>
 
       <View
@@ -64,29 +65,71 @@ const Plan = () => {
         }}
       >
         <MapPinIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
-        <Text type="paragraph4">{`${professional.location}`}</Text>
+        <Text type="paragraph4">London</Text>
       </View>
 
-      <View style={[baseStyle.section, {flexWrap: "wrap"}]}>
-        <View>
+      <View
+        style={[
+          baseStyle.section,
+          {
+            flexWrap: "wrap",
+            flexDirection: "row",
+            gap: 10,
+            justifyContent: "space-between",
+          },
+        ]}
+      >
+        <View
+          style={{
+            borderColor: baseStyle.gray300,
+            borderWidth: 1,
+            borderRadius: 20,
+            padding: 20,
+            width: "47%",
+          }}
+        >
           <Text weight="medium" type="paragraph3">
             Booking Type
           </Text>
           <Text type="paragraph4">{booking.bookingType}</Text>
         </View>
-        <View>
+        <View
+          style={{
+            borderColor: baseStyle.gray300,
+            borderWidth: 1,
+            borderRadius: 20,
+            padding: 20,
+            width: "48%",
+          }}
+        >
           <Text weight="medium" type="paragraph3">
             Appointment Type
           </Text>
           <Text type="paragraph4">{booking.appointmentType}</Text>
         </View>
-        <View>
+        <View
+          style={{
+            borderColor: baseStyle.gray300,
+            borderWidth: 1,
+            borderRadius: 20,
+            padding: 20,
+            width: "48%",
+          }}
+        >
           <Text weight="medium" type="paragraph3">
             Date
           </Text>
           <Text type="paragraph4">{booking.bookingDate}</Text>
         </View>
-        <View>
+        <View
+          style={{
+            borderColor: baseStyle.gray300,
+            borderWidth: 1,
+            borderRadius: 20,
+            padding: 20,
+            width: "48%",
+          }}
+        >
           <Text weight="medium" type="paragraph3">
             Time
           </Text>
@@ -95,8 +138,14 @@ const Plan = () => {
       </View>
 
       <View style={baseStyle.section}>
-        <Text type="paragraph4">Time</Text>
+        <Text weight="medium" type="paragraph3">
+          Message
+        </Text>
+        <Text type="paragraph4">{booking.message}</Text>
       </View>
+
+      <Button text="Reschedule" />
+
     </ScrollView>
   );
 };
