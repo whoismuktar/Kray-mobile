@@ -3,6 +3,7 @@ import { ClockIcon, BeakerIcon } from "react-native-heroicons/outline";
 import { baseStyle } from "../src/assets/styles/base";
 
 const initialState = {
+  authMode: "professional",
   onboarding: {
     currentStage: 1,
     stages: 3,

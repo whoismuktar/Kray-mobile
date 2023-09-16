@@ -110,9 +110,9 @@ const SignUp = () => {
             onPress={() => navigation.navigate("Main")}
           />
         </View>
-        <View>
+        {/* <View>
           <AltAuth mode="signUp" />
-        </View>
+        </View> */}
 
         <View
           style={{

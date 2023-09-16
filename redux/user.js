@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  isProfAuth: true,
+  isProfAccount: true,
   user: {
     id: 3,
     username: "martha",
@@ -122,10 +124,14 @@ const initialState = {
 export const appSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setIsProfAuth: (state, action) => {
+      state.isProfAuth = action.payload;
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const {} = appSlice.actions;
+export const {setIsProfAuth} = appSlice.actions;
 
 export default appSlice.reducer;

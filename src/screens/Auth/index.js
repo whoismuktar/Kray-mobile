@@ -27,7 +27,10 @@ function Auth(props) {
       </Text>
 
       <View>
-        <Button text="Sign Up as a Student" />
+        <Button
+          text="Sign Up as a Student"
+          onPress={() => navigation.navigate("SignUp")}
+        />
         <Button text="Sign Up as Health Professional" />
       </View>
 

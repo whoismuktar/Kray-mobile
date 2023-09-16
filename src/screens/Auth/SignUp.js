@@ -12,6 +12,7 @@ import { baseStyle } from "../../assets/styles/base";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import HeaderLeft from "../../components/HeaderLeft";
 import {
   UserIcon,
   EnvelopeIcon,
@@ -48,11 +49,22 @@ const SignUp = () => {
     <HideKeyboard>
       <ScrollView showsVerticalScrollIndicator={false} style={baseStyle.page}>
         <View style={baseStyle.section}>
-          <Text weight="medium" type="header1">
-            Create Account
-          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginLeft: -15,
+            }}
+          >
+            <HeaderLeft />
+            <Text style={{ marginLeft: 10 }} weight="medium" type="header1">
+              Create Account
+            </Text>
+          </View>
+
           <Text type="paragraph4">Enter your personal details</Text>
         </View>
+
         <View style={baseStyle.inputWrapper}>
           <Text weight="medium" type="paragraph3">
             First Name
@@ -181,9 +193,9 @@ const SignUp = () => {
         <View style={baseStyle.section}>
           <Button disabled={true} text="Create Account" />
         </View>
-        <View>
+        {/* <View>
           <AltAuth mode="login" />
-        </View>
+        </View> */}
 
         <View
           style={{
