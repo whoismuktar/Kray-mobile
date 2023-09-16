@@ -26,7 +26,9 @@ const OnboardingView = (props) => {
   const gotoNextStage = () => {
     if (onboarding.currentStage < 3) {
       dispatch(setOnboardingCurrentStage(currentStage + 1));
+      return
     }
+    return navigation.navigate("Auth")
   };
 
   return (
