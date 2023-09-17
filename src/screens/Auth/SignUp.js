@@ -57,7 +57,11 @@ const SignUp = () => {
             }}
           >
             <HeaderLeft />
-            <Text style={{ marginLeft: 10 }} weight="medium" type="header1">
+            <Text
+              style={{ marginLeft: 10, marginBottom: 10 }}
+              weight="medium"
+              type="header1"
+            >
               Create Account
             </Text>
           </View>

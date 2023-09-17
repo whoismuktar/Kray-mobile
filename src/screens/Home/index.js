@@ -11,55 +11,63 @@ import Text from "../../components/Text";
 import { BellIcon } from "react-native-heroicons/solid";
 import EmojiMoodCards from "../../components/EmojiMoodCards";
 import MoodCard from "../../components/MoodCard";
+import ProfHome from "./ProfHome";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
 function Home(props) {
-  const { userActivities } = useSelector((state) => state.user);
+  const { isProfAccount, userActivities } = useSelector((state) => state.user);
   const navigation = useNavigation();
 
   return (
-    <View style={styles.page}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingBottom: 10,
-        }}
-      >
-        <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
+    <>
+      {isProfAccount ? 
+        <ProfHome /> : 
+        <View style={styles.page}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingBottom: 10,
+            }}
+          >
+            <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
 
-        <BellIcon color={baseStyle.pryColor} />
-      </View>
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={baseStyle.section}>
-          <View style={styles.heroCard}>
-            <Text>
-              "Be kind to yourself. Remember, you are doing the best you can
-              with what you know at this moment."
-            </Text>
+            <BellIcon color={baseStyle.pryColor} />
           </View>
-        </View>
 
-        <View>
-          <Text type="header1">How are you feeling today?</Text>
-          <EmojiMoodCards />
-        </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={baseStyle.section}>
+              <View style={styles.heroCard}>
+                <Text>
+                  "Be kind to yourself. Remember, you are doing the best you can
+                  with what you know at this moment."
+                </Text>
+              </View>
+            </View>
 
-        <View>
-          <Text type="header1">Healthy Habits</Text>
-          <FlatList
-            keyExtractor={(item, index) => index}
-            data={userActivities}
-            scrollEnabled={false}
-            ItemSeparatorComponent={<View style={{ marginBottom: 20 }}></View>}
-            renderItem={({ item, index }) => <MoodCard activity={item} />}
-          />
+            <View>
+              <Text type="header1">How are you feeling today?</Text>
+              <EmojiMoodCards />
+            </View>
+
+            <View>
+              <Text type="header1">Healthy Habits</Text>
+              <FlatList
+                keyExtractor={(item, index) => index}
+                data={userActivities}
+                scrollEnabled={false}
+                ItemSeparatorComponent={
+                  <View style={{ marginBottom: 20 }}></View>
+                }
+                renderItem={({ item, index }) => <MoodCard activity={item} />}
+              />
+            </View>
+          </ScrollView>
         </View>
-      </ScrollView>
-    </View>
+      }
+    </>
   );
 }
 

@@ -16,12 +16,16 @@ import {
   ChartBarIcon,
   Cog8ToothIcon,
   ArrowRightOnRectangleIcon,
+  FolderIcon,
+  ChartPieIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
   MapIcon as MapIconOut,
   TableCellsIcon as TableCellsIconOut,
   ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconOut,
+  FolderIcon as FolderIconOut,
+  ChartPieIcon as ChartPieIconOut,
 } from "react-native-heroicons/outline";
 import randomLogo from "./src/assets/images/randomLogo.png";
 import OnboardingScreen from "./src/screens/Onboarding";
@@ -47,6 +51,8 @@ import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import NewGoalScreen from "./src/screens/Goals/New";
 import GoalScreen from "./src/screens/Goals/Goal";
+import AppointmentRequestScreen from "./src/screens/Appointments/Requests";
+import TodaysAppointmentScreen from "./src/screens/Appointments/TodaysAppointment";
 import ProProfileScreen from "./src/screens/Professionals/ProProfile";
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
@@ -60,8 +66,9 @@ const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 function DrawerContent(props) {
-  const { user } = useSelector((state) => state.user);
-  const menu = [
+  const { isProfAccount, user } = useSelector((state) => state.user);
+
+  const studentMenu = [
     {
       title: "Profile",
       path: "Profile",
@@ -83,6 +90,16 @@ function DrawerContent(props) {
       icon: <Cog8ToothIcon color={baseStyle.black} size={20} />,
     },
   ];
+
+  const profMenu = [
+    {
+      title: "Profile",
+      path: "Profile",
+      icon: <UserCircleIcon color={baseStyle.black} size={20} />,
+    },
+  ];
+
+  const menu = isProfAccount ? profMenu : studentMenu
 
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
@@ -152,12 +169,12 @@ function DrawerContent(props) {
         </View>
 
         <View
-          style={{
+          style={[!isProfAccount && {
             position: "absolute",
             bottom: 20,
             left: 20,
             width: "100%",
-          }}
+          }]}
         >
           <Pressable
             style={{ flexDirection: "row", alignItems: "center" }}
@@ -173,6 +190,8 @@ function DrawerContent(props) {
 }
 
 function BottomNav() {
+  const { isProfAccount } = useSelector((state) => state.user);
+
   const BottomLabel = ({ focused, title }) => {
     return focused ? (
       <Text
@@ -192,7 +211,8 @@ function BottomNav() {
       </Text>
     );
   };
-  return (
+
+  const StudentBottomTab = () => (
     <BottomTab.Navigator
       initialRouteName="Home" // change during auth
       screenOptions={{
@@ -301,13 +321,124 @@ function BottomNav() {
       />
     </BottomTab.Navigator>
   );
+  const ProfBottomTab = () => (
+    <BottomTab.Navigator
+      initialRouteName="Home" // change during auth
+      screenOptions={{
+        // tabBarActiveTintColor: "blue",
+        tabBarLabelStyle: {
+          fontSize: 13,
+          textTransform: "capitalize",
+          color: baseStyle.pryColor,
+          fontWeight: "500",
+        },
+        tabBarStyle: {
+          paddingTop: 10,
+          paddingBottom: 30,
+        },
+        headerStyle: {
+          elevation: 0, // remove shadow on Android
+          shadowOpacity: 0, // remove shadow on iOS
+          borderBottomWidth: 0, // Just in case.
+        },
+        headerTitleAlign: "left",
+        headerTitleStyle: {
+          color: baseStyle.textBlack,
+          fontWeight: "500",
+          fontSize: 20,
+        },
+        headerShown: false,
+      }}
+    >
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+          gestureEnabled: true,
+          tabBarLabelStyle: {},
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Home" />;
+          },
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <HomeIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <HomeIconOut color={baseStyle.pryColor} size={26} />
+            ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Tasks"
+        component={ExploreScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Tasks",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Tasks" />;
+          },
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <FolderIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <FolderIconOut color={baseStyle.pryColor} size={26} />
+            ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Bookings"
+        component={PlansScreen}
+        options={{
+          headerShown: true,
+          headerRight: () => (
+            <Pressable style={{ marginRight: 20 }}>
+              {/* <CreateEvent color="black" /> */}
+            </Pressable>
+          ),
+          headerTitle: "Bookings",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Bookings" />;
+          },
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <ChatBubbleLeftRightIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <ChatBubbleLeftRightIconOut
+                color={baseStyle.pryColor}
+                size={26}
+              />
+            ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Analytics"
+        component={BookingsScreen}
+        options={{
+          headerShown: true,
+          headerTitle: "Book Health Professionals",
+          tabBarLabel: ({ focused, color, size }) => {
+            return <BottomLabel focused={focused} title="Analytics" />;
+          },
+          tabBarIcon: ({ focused, color, size }) =>
+            focused ? (
+              <ChartPieIcon color={baseStyle.pryColor} size={26} />
+            ) : (
+              <ChartPieIconOut color={baseStyle.pryColor} size={26} />
+            ),
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+  return <>{isProfAccount ? <ProfBottomTab /> : <StudentBottomTab />}</>;
 }
 
 function DrawerNav() {
-  return (
+  const { isProfAccount } = useSelector((state) => state.user);
+
+  const StudentDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Onboarding" // change during auth
+      initialRouteName="Main" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -325,7 +456,16 @@ function DrawerNav() {
         options={{}}
       />
       <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} options={{}} />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Create New Plan",
+          headerTitleAlign: "left",
+        }}
+      />
       <Stack.Screen name="Login" component={LoginScreen} options={{}} />
       <Stack.Screen
         name="RegisterVerification"
@@ -419,6 +559,84 @@ function DrawerNav() {
       />
     </Drawer.Navigator>
   );
+  const ProfDrawerNav = () => (
+    <Drawer.Navigator
+      drawerContent={(props) => <DrawerContent {...props} />}
+      initialRouteName="Main" // change during auth
+      screenOptions={{
+        drawerType: "front",
+        headerShown: false,
+      }}
+    >
+      <Drawer.Screen name="Main" options={{}} component={BottomNav} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{}}
+      />
+      <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Create New Plan",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen name="Login" component={LoginScreen} options={{}} />
+      <Stack.Screen
+        name="RegisterVerification"
+        component={RegisterVerificationScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="ProProfile"
+        component={ProProfileScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Profile",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="AppointmentRequests"
+        component={AppointmentRequestScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Appointment Request",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="TodaysAppointment"
+        component={TodaysAppointmentScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Today's Appointment",
+          headerTitleAlign: "left",
+        }}
+      />
+    </Drawer.Navigator>
+  );
+
+  return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
 }
 
 export default function Navigator() {

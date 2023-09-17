@@ -18,6 +18,7 @@ import {
 } from "react-native-heroicons/solid";
 import AltAuth from "../../components/AltAuth";
 import { useNavigation } from "@react-navigation/native";
+import HeaderLeft from "../../components/HeaderLeft";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -40,10 +41,19 @@ const SignUp = () => {
         showsVerticalScrollIndicator={false}
         style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}
       >
-        <View style={baseStyle.section}>
-          <Text weight="medium" type="header1">
-            Welcome Back
-          </Text>
+        <View style={{marginBottom: 10}}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginLeft: -15,
+            }}
+          >
+            <HeaderLeft />
+            <Text weight="medium" type="header1">
+              Welcome Back
+            </Text>
+          </View>
           <Text type="paragraph4">Enter your personal details</Text>
         </View>
 

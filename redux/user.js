@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isProfAuth: true,
   isProfAccount: true,
+  appointmentRequests: [1,2,3,4,5,6,7,8,9],
   user: {
     id: 3,
     username: "martha",
