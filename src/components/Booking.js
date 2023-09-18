@@ -131,7 +131,7 @@ const Booking = ({ isRequest }) => {
           source={{
             uri: "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team2.jpg",
           }}
-          imageStyle={{ borderRadius: "100%" }}
+          imageStyle={{ borderRadius: 400 }}
           resizeMode="cover"
           style={{ width: 120, height: 120, marginBottom: 20 }}
         ></ImageBackground>

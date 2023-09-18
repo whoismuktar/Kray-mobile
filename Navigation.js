@@ -46,6 +46,8 @@ import BookingsScreen from "./src/screens/Bookings";
 import NewBookingScreen from "./src/screens/Bookings/New";
 import BookingScreen from "./src/screens/Bookings/Booking";
 import ProfileScreen from "./src/screens/Profile";
+import EditProfileScreen from "./src/screens/Profile/EditProfile";
+import AccountScreen from "./src/screens/Profile/Account";
 import NotificationScreen from "./src/screens/Notification";
 import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
@@ -104,7 +106,7 @@ function DrawerContent(props) {
     },
   ];
 
-  const menu = isProfAccount ? profMenu : studentMenu
+  const menu = isProfAccount ? profMenu : studentMenu;
 
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
@@ -174,12 +176,14 @@ function DrawerContent(props) {
         </View>
 
         <View
-          style={[!isProfAccount && {
-            position: "absolute",
-            bottom: 20,
-            left: 20,
-            width: "100%",
-          }]}
+          style={[
+            !isProfAccount && {
+              position: "absolute",
+              bottom: 20,
+              left: 20,
+              width: "100%",
+            },
+          ]}
         >
           <Pressable
             style={{ flexDirection: "row", alignItems: "center" }}
@@ -328,7 +332,7 @@ function BottomNav() {
   );
   const ProfBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName="ProfBookings" // change during auth
+      initialRouteName="EditProfile" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -567,14 +571,13 @@ function DrawerNav() {
   const ProfDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="ViewBookingRequest" // change during auth
+      initialRouteName="EditProfile" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
       }}
     >
       <Drawer.Screen name="Main" options={{}} component={BottomNav} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
 
       <Stack.Screen
         name="Onboarding"
@@ -588,7 +591,7 @@ function DrawerNav() {
         options={{
           headerShown: true,
           headerLeft: () => <HeaderLeft />,
-          headerTitle: "Create New Plan",
+          headerTitle: "Create New Account",
           headerTitleAlign: "left",
         }}
       />
@@ -645,6 +648,36 @@ function DrawerNav() {
           headerShown: true,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Appointment Request",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Profile",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Edit Profile",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Account",
           headerTitleAlign: "left",
         }}
       />
