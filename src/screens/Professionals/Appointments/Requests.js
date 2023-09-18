@@ -1,20 +1,20 @@
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
-import { baseStyle } from "../../assets/styles/base";
-import UserCard from "../../components/UserCard";
-import Text from "../../components/Text";
-import EmojiMoodCards from "../../components/EmojiMoodCards";
-import AppointmentCard from "../../components/AppointmentCard";
+import { baseStyle } from "../../../assets/styles/base";
+import UserCard from "../../../components/UserCard";
+import Text from "../../../components/Text";
+import EmojiMoodCards from "../../../components/EmojiMoodCards";
+import AppointmentCard from "../../../components/AppointmentCard";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
-function ApprovedAppointment(props) {
-  const { Approvedappointments } = useSelector((state) => state.user);
+function AppointmentRequest(props) {
+  const { appointmentRequests } = useSelector((state) => state.user);
   const navigation = useNavigation();
 
   return (
     <FlatList
       keyExtractor={(item, index) => index}
-      data={Approvedappointments}
+      data={appointmentRequests}
       contentContainerStyle={{
         paddingLeft: 0,
       }}
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ApprovedAppointment;
+export default AppointmentRequest;

@@ -51,9 +51,14 @@ import AnalyticsScreen from "./src/screens/Analytics";
 import SettingsScreen from "./src/screens/Settings";
 import NewGoalScreen from "./src/screens/Goals/New";
 import GoalScreen from "./src/screens/Goals/Goal";
-import AppointmentRequestScreen from "./src/screens/Appointments/Requests";
-import TodaysAppointmentScreen from "./src/screens/Appointments/TodaysAppointment";
+
+// Pro Screens
+import AppointmentRequestScreen from "./src/screens/Professionals/Appointments/Requests";
 import ProProfileScreen from "./src/screens/Professionals/ProProfile";
+import TodaysAppointmentScreen from "./src/screens/Professionals/Appointments/TodaysAppointment";
+import ProfBookingsScreen from "./src/screens/Professionals/Bookings";
+import ViewBookingRequestScreen from "./src/screens/Professionals/Bookings/ViewBookingRequest";
+
 import { baseStyle } from "./src/assets/styles/base";
 import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
@@ -323,7 +328,7 @@ function BottomNav() {
   );
   const ProfBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName="Home" // change during auth
+      initialRouteName="ProfBookings" // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -386,8 +391,8 @@ function BottomNav() {
         }}
       />
       <BottomTab.Screen
-        name="Bookings"
-        component={PlansScreen}
+        name="ProfBookings"
+        component={ProfBookingsScreen}
         options={{
           headerShown: true,
           headerRight: () => (
@@ -562,7 +567,7 @@ function DrawerNav() {
   const ProfDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Main" // change during auth
+      initialRouteName="ViewBookingRequest" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -630,6 +635,16 @@ function DrawerNav() {
           headerShown: true,
           headerLeft: () => <HeaderLeft />,
           headerTitle: "Today's Appointment",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="ViewBookingRequest"
+        component={ViewBookingRequestScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Appointment Request",
           headerTitleAlign: "left",
         }}
       />
