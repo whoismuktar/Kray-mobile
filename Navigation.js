@@ -571,7 +571,7 @@ function DrawerNav() {
   const ProfDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="EditProfile" // change during auth
+      initialRouteName="SignUp" // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,

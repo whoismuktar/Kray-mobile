@@ -12,7 +12,6 @@ import { baseStyle } from "../../assets/styles/base";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import HeaderLeft from "../../components/HeaderLeft";
 import {
   UserIcon,
   EnvelopeIcon,
@@ -22,6 +21,9 @@ import {
 } from "react-native-heroicons/solid";
 import AltAuth from "../../components/AltAuth";
 import { useNavigation } from "@react-navigation/native";
+import { register } from "../../services/auth";
+import { useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -31,6 +33,7 @@ const HideKeyboard = ({ children }) => (
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const { isProfAuth } = useSelector((state) => state.user);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -45,29 +48,40 @@ const SignUp = () => {
   const onChangePassword = (text) => setPassword(text);
   const onChangeConfirmPassword = (text) => setConfirmPassword(text);
 
+  const initRegister = () => {
+    const credentials = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+    if (isProfAuth) {
+      credentials.userCategory = "healthprof";
+    }
+
+    register(credentials)
+      .then((response) => {
+        console.log({ response });
+
+        navigation.navigate("Home");
+      })
+      .catch((err) => {
+        console.log({err});
+        const message = err.response?.data?.message || "Error registering your account";
+
+        Toast.show({
+          type: "error",
+          text1: message,
+        });
+      });
+  };
+
   return (
     <HideKeyboard>
       <ScrollView showsVerticalScrollIndicator={false} style={baseStyle.page}>
-        <View style={baseStyle.section}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: -15,
-            }}
-          >
-            <HeaderLeft />
-            <Text
-              style={{ marginLeft: 10, marginBottom: 10 }}
-              weight="medium"
-              type="header1"
-            >
-              Create Account
-            </Text>
-          </View>
-
-          <Text type="paragraph4">Enter your personal details</Text>
-        </View>
+        <Text type="paragraph4" style={{ marginBottom: 10 }}>
+          Enter your personal details
+        </Text>
 
         <View style={baseStyle.inputWrapper}>
           <Text weight="medium" type="paragraph3">
@@ -195,7 +209,11 @@ const SignUp = () => {
           <Text weight="medium">Terms & Conditions and Privacy Policy</Text>
         </View>
         <View style={baseStyle.section}>
-          <Button disabled={true} text="Create Account" />
+          <Button
+            disabled={true}
+            text="Create Account"
+            onPress={initRegister}
+          />
         </View>
         {/* <View>
           <AltAuth mode="login" />

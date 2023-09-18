@@ -4,6 +4,7 @@ import Navigator from "./Navigation";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { useFonts } from "expo-font";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,14 +17,13 @@ export default function App() {
     return null;
   }
 
-
   return (
     <Provider store={store}>
       <StatusBar style="auto" />
       <Navigator />
+      <Toast />
     </Provider>
   );
-
 }
 
 const styles = StyleSheet.create({
