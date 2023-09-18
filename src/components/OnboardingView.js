@@ -53,12 +53,6 @@ const OnboardingView = (props) => {
         resizeMode="contain"
         style={styles.image}
       ></ImageBackground>
-      {/* <Svg svgMarkup={JSON.stringify(MoonImg)} /> */}
-      {/* <SvgUri
-        width="200"
-        height="200"
-        svgXmlData={MoonImg}
-      /> */}
 
       {currentStage == 1 && (
         <View>
@@ -106,7 +100,6 @@ const OnboardingView = (props) => {
 const styles = StyleSheet.create({
   image: {
     width: "100%",
-    // height: "75%",
     justifyContent: "center",
     marginTop: 40,
     marginBottom: 40,

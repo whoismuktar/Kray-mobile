@@ -26,9 +26,6 @@ function SelectActivity({ navigation }) {
     }
     const selected = activities.find((cat) => cat.id === id);
     setSelection((selection) => [...selection, selected]);
-
-    // dispatch(setUserActivities([...userActivities, selected]))
-    // console.log(userActivities);
   };
 
   return (
@@ -42,12 +39,12 @@ function SelectActivity({ navigation }) {
 
       <View style={{ flex: 0.8 }}>
         <FlatList
-          // contentContainerStyle={{flexDirection : "row", flexWrap : "wrap"}}
+
           keyExtractor={(item, index) => index}
           data={activities}
           extraData={refreshList}
           numColumns={3}
-          // style={{flex: 0.8}}
+
           renderItem={({ item, index }) => (
             <Chip
               multiple
@@ -62,8 +59,6 @@ function SelectActivity({ navigation }) {
           )}
         />
       </View>
-
-      {/* <View style={{ flex: 0.8 }}></View> */}
 
       <Button
         text="Continue"

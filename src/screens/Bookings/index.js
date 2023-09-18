@@ -19,7 +19,7 @@ const HideKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-function Bookings({navigation}) {
+function Bookings({ navigation }) {
   const { professionals } = useSelector((state) => state.user);
   const filters = [
     {
@@ -85,15 +85,12 @@ function Bookings({navigation}) {
             data={professionals}
             vertical
             ItemSeparatorComponent={<View style={{ marginBottom: 20 }}></View>}
-            
             contentContainerStyle={{
-              // paddingTop: 20,
               paddingBottom: 120,
               width: "90%",
               alignSelf: "center",
-              // height: "100%",
+
               flexGrow: 1,
-              // backgroundColor: "red",
             }}
             renderItem={({ item, index }) => <ProCard professional={item} />}
           />

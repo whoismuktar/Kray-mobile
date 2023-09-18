@@ -15,7 +15,7 @@ const Profile = ({ navigation }) => {
       <View style={{ flexDirection: "column", alignItems: "center" }}>
         <ImageBackground
           source={{
-            uri: "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team2.jpg",
+            uri: booking.prof.profileImage,
           }}
           imageStyle={{ borderRadius: 400 }}
           resizeMode="cover"

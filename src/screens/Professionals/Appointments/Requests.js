@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   page: {
     ...baseStyle.page,
     paddingTop: 80,
-    // paddingBottom: 280,
   },
   heroCard: {
     ...baseStyle.allChildrenCenter,

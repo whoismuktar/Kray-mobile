@@ -1,14 +1,10 @@
 import { ImageBackground, Pressable, ScrollView, View } from "react-native";
 import Text from "../../components/Text";
 import { baseStyle } from "../../assets/styles/base";
-import { getFullName } from "../../utils/helpers";
 import {
   AcademicCapIcon,
-  CalendarDaysIcon,
   CheckBadgeIcon,
-  ChevronRightIcon,
   EnvelopeIcon,
-  PencilIcon,
   UserIcon,
 } from "react-native-heroicons/solid";
 import Input from "../../components/Input";
@@ -39,7 +35,7 @@ const EditProfile = ({ navigation }) => {
       <View style={{ flexDirection: "column", alignItems: "center" }}>
         <ImageBackground
           source={{
-            uri: "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team2.jpg",
+            uri: booking.prof.profileImage,
           }}
           imageStyle={{ borderRadius: 400 }}
           resizeMode="cover"
@@ -235,9 +231,7 @@ const EditProfile = ({ navigation }) => {
         />
       </View>
 
-
       <Button text="Update Profile" />
-
     </ScrollView>
   );
 };

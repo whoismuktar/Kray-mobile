@@ -11,27 +11,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { deviceHeight, deviceWidth } from "../utils/helpers";
 
-const booking = {
-  id: 44,
-  title: "Online Appointment for Student 2",
-  appointmentType: "COUNSELLING",
-  bookingType: "ONLINE",
-  studentId: 26,
-  profId: 2,
-  bookingDate: "2023-09-18 12:00:00",
-  response: false,
-  appointmentComment: null,
-  postCode: null,
-  address: null,
-  phone: null,
-  message:
-    "I've been experiencing increased anxiety lately and would appreciate your guidance in managing it effectively. Excited to connect with you.",
-  status: "Requested",
-  createdDate: "2023-08-29",
-  updatedDate: "2023-08-29",
-};
-
-const Booking = ({ isRequest }) => {
+const Booking = ({ booking, isRequest }) => {
   const [plan, setPlan] = useState({});
   const [statusPick, setStatusPick] = useState("");
 
@@ -65,17 +45,7 @@ const Booking = ({ isRequest }) => {
           placeholderTextColor="grey"
           numberOfLines={10}
           multiline={true}
-          value={`Hi ${"user"}, your requested appointment has been accepted and scheduled for an in-person meeting.
-
-              ${(<Text>Appointment Information</Text>)}
-              ${(
-                <ul>
-                  <li>Address: [Venue Address]</li>
-                  <li>Postcode: [Venue postcode]</li>
-                  <li>Phone number: [Phone]</li>
-                </ul>
-              )}
-              `}
+          value={acceptNote}
         />
       </View>
 
@@ -99,18 +69,7 @@ const Booking = ({ isRequest }) => {
           placeholderTextColor="grey"
           numberOfLines={10}
           multiline={true}
-          value={`
-              Hi ${"user"}, your requested appointment has been accepted and scheduled for an in-person meeting.
-
-              ${(<Text>Appointment Information</Text>)}
-              ${(
-                <ul>
-                  <li>Address: [Venue Address]</li>
-                  <li>Postcode: [Venue postcode]</li>
-                  <li>Phone number: [Phone]</li>
-                </ul>
-              )}
-              `}
+          value={declineNote}
         />
       </View>
 
@@ -129,7 +88,7 @@ const Booking = ({ isRequest }) => {
       <View style={{ alignItems: "center" }}>
         <ImageBackground
           source={{
-            uri: "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/img/avatars/team2.jpg",
+            uri: booking.prof.profileImage,
           }}
           imageStyle={{ borderRadius: 400 }}
           resizeMode="cover"
@@ -138,7 +97,7 @@ const Booking = ({ isRequest }) => {
       </View>
 
       <Text type="paragraph3" style={{ marginBottom: 10 }}>
-        Dr Alex Morgan
+        {getFullName(booking.prof)}
       </Text>
       <View
         style={{
@@ -147,7 +106,7 @@ const Booking = ({ isRequest }) => {
         }}
       >
         <BriefcaseIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
-        <Text type="paragraph4">Mental</Text>
+        <Text type="paragraph4">{booking.prof.specialization}</Text>
       </View>
 
       <View
@@ -157,7 +116,7 @@ const Booking = ({ isRequest }) => {
         }}
       >
         <MapPinIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
-        <Text type="paragraph4">London</Text>
+        <Text type="paragraph4">{booking.prof.location}</Text>
       </View>
 
       <View

@@ -1,13 +1,6 @@
 import { ImageBackground, View } from "react-native";
 import Text from "../../components/Text";
 import { baseStyle } from "../../assets/styles/base";
-import { getFullName } from "../../utils/helpers";
-import {
-  CalendarDaysIcon,
-  ChevronRightIcon,
-  PencilIcon,
-  UserIcon,
-} from "react-native-heroicons/solid";
 
 const Profile = ({ navigation }) => {
   return (

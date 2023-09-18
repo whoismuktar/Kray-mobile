@@ -142,7 +142,7 @@ const Plan = () => {
         />
       </View>
 
-      <Button text="Book A Session" />
+      <Button text="Book A Session" onPress={createbooking} />
 
     </ScrollView>
   );

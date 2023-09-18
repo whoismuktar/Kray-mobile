@@ -8,3 +8,7 @@ export const register = (credentials) => {
   return axios.post("/auth/signup", credentials);
 };
 
+export const resetPassword = () => {
+  return axios.post("/auth/reset");
+};
+

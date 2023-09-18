@@ -42,7 +42,7 @@ const NewPlan = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [endDateOpen, setEndDateOpen] = useState(false);
 
-  const [activities, setActivities] = useState(["hello"]);
+  const [activities, setActivities] = useState([""]);
   const [timeline, setTimeline] = useState();
 
   const removeActivity = (i) => {
@@ -231,7 +231,7 @@ const NewPlan = () => {
           </View>
         </View>
 
-        <Button text="Create" />
+        <Button text="Create" onPress={createPlan} />
       </ScrollView>
     </HideKeyboard>
   );

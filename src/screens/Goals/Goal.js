@@ -32,7 +32,7 @@ const Goal = () => {
 
         <View>
           <Text type="paragraph4" style={{ textAlign: "right" }}>
-            25%
+            {goal.progress}
           </Text>
 
           <Stepper color={baseStyle.black} />

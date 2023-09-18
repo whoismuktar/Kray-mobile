@@ -94,13 +94,11 @@ function Plans({ navigation }) {
           vertical
           ItemSeparatorComponent={<View style={{ marginBottom: 20 }}></View>}
           contentContainerStyle={{
-            // paddingTop: 20,
             paddingBottom: 120,
             width: "90%",
             alignSelf: "center",
-            // height: "100%",
+
             flexGrow: 1,
-            // backgroundColor: "red",
           }}
           renderItem={({ item, index }) => <PlanCard plan={item} />}
         />

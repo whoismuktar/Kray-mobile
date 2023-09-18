@@ -1,9 +1,9 @@
 import { View } from "react-native";
-import { useSelector } from "react-redux";
 import Text from "./Text";
 import { baseStyle } from "../assets/styles/base";
 import UserCard from "./UserCard";
 import Button from "./Button";
+import { getFullName } from "../utils/helpers";
 
 function AppointmentCard({ booking }) {
   return (
@@ -17,16 +17,12 @@ function AppointmentCard({ booking }) {
         padding: 20,
       }}
     >
-      <UserCard
-        aviWidth={50}
-        aviHeight={50}
-      />
-      <View
-      >
-        <Text weight="medium">First Last</Text>
-        <Text weight="medium">25 Years</Text>
-        <Text weight="medium">July 4</Text>
-        <Text weight="medium">9:00 AM</Text>
+      <UserCard aviWidth={50} aviHeight={50} />
+      <View>
+        <Text weight="medium">{getFullName(booking.student)}</Text>
+        <Text weight="medium">{booking.student.dob}</Text>
+        <Text weight="medium">{getDate(booking.createdOn)}</Text>
+        <Text weight="medium">{getTime(booking.createdOn)}</Text>
 
         <Button
           text="View Details"
