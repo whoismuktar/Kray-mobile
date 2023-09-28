@@ -19,6 +19,9 @@ import {
 import AltAuth from "../../components/AltAuth";
 import { useNavigation } from "@react-navigation/native";
 import HeaderLeft from "../../components/HeaderLeft";
+import { login } from "../../services/auth";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../../../redux/user";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -28,12 +31,36 @@ const HideKeyboard = ({ children }) => (
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("studentTestAccount@gmail.com");
+  const [password, setPassword] = useState("qwerty");
   const [showPassword, setShowPassword] = useState(false);
+  const [authLoading, setAuthLoading] = useState(false);
 
   const onChangePassword = (text) => setPassword(text);
+  const handleLogin = () => {
+    setAuthLoading(true);
+
+    login({ email, password })
+      .then((res) => {
+        const { token } = res.data.token;
+        dispatch(setAccessToken(token));
+
+        setAuthLoading(false);
+        navigation.navigate("Home");
+      })
+      .catch((e) => {
+        const { message } =
+          e.response?.data || "There was an issue signing you in";
+
+        Toast.show({
+          type: "error",
+          text1: message,
+        });
+        setAuthLoading(false);
+      });
+  };
 
   return (
     <HideKeyboard>
@@ -41,7 +68,7 @@ const SignUp = () => {
         showsVerticalScrollIndicator={false}
         style={{ ...baseStyle.page, ...baseStyle.page.noHeader }}
       >
-        <View style={{marginBottom: 10}}>
+        <View style={{ marginBottom: 10 }}>
           <View
             style={{
               flexDirection: "row",
@@ -80,6 +107,8 @@ const SignUp = () => {
             placeholder="Enter password"
             onChangeText={onChangePassword}
             value={password}
+            secureTextEntry={!showPassword}
+            textContentType={"password"}
           />
           <Pressable
             style={{
@@ -115,9 +144,11 @@ const SignUp = () => {
 
         <View style={baseStyle.section}>
           <Button
-            disabled={true}
+            // disabled={true}
+            loader={authLoading}
             text="Log In"
-            onPress={() => navigation.navigate("Main")}
+            // onPress={() => navigation.navigate("Main")}
+            onPress={() => handleLogin()}
           />
         </View>
         {/* <View>

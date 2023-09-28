@@ -9,9 +9,6 @@ function MoodCard({ activity }) {
 
   const getActivityType = (name) => activities.find((a) => name === a.id);
   const getUnitIcon = (unit) => unitIcons.find((u) => unit === u.unit);
-
-  console.log("act---", getUnitIcon("time"));
-
   return (
     <View
       style={{

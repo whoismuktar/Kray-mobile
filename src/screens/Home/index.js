@@ -8,7 +8,6 @@ import {
 import { baseStyle } from "../../assets/styles/base";
 import UserCard from "../../components/UserCard";
 import Text from "../../components/Text";
-import { BellIcon } from "react-native-heroicons/solid";
 import EmojiMoodCards from "../../components/EmojiMoodCards";
 import MoodCard from "../../components/MoodCard";
 import ProfHome from "./ProfHome";
@@ -17,33 +16,28 @@ import { useNavigation } from "@react-navigation/native";
 
 function Home(props) {
   const { isProfAccount, userActivities } = useSelector((state) => state.user);
+  const { quotes } = useSelector((state) => state.app);
   const navigation = useNavigation();
+
+  const quoteOfTheDay = () => {
+    const idx = Math.floor(Math.random() * quotes.length);
+
+    console.log(idx);
+    return quotes[idx];
+  };
 
   return (
     <>
-      {isProfAccount ? 
-        <ProfHome /> : 
+      {isProfAccount ? (
+        <ProfHome />
+      ) : (
         <View style={styles.page}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingBottom: 10,
-            }}
-          >
-            <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
-
-            <BellIcon color={baseStyle.pryColor} />
-          </View>
+          <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={baseStyle.section}>
               <View style={styles.heroCard}>
-                <Text>
-                  "Be kind to yourself. Remember, you are doing the best you can
-                  with what you know at this moment."
-                </Text>
+                <Text>"{quoteOfTheDay()}"</Text>
               </View>
             </View>
 
@@ -66,7 +60,7 @@ function Home(props) {
             </View>
           </ScrollView>
         </View>
-      }
+      )}
     </>
   );
 }

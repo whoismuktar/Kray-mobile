@@ -1,22 +1,28 @@
 import axios from "axios";
 
 const TOKEN = "";
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = "http://192.168.1.7:8080/api/v1";
 
 const instance = axios.create({
   baseURL,
   headers: {
-    Authorization: TOKEN && `Bearer ${TOKEN}`,
+    // Authorization: TOKEN && `Bearer ${TOKEN}`,
     Accept: "application/json",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json; charset=utf-8",
   },
 });
+
+console.log(process.env);
+// console.log({baseURL});
+console.log(axios.defaults);
 
 // RESPONSE INTERCEPTOR
 instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+
+    console.log({ response });
     return response;
   },
   function (error) {
@@ -37,6 +43,25 @@ instance.interceptors.response.use(
     // localStorage.removeItem("auth_token");
     // }
     return Promise.reject(error);
+  }
+);
+
+
+instance.interceptors.request.use(
+  function (request) {
+    // console.log("=================");
+    // console.log("=================");
+    // console.log({ request });
+    // console.log("=================");
+    // console.log("=================");
+    // console.log("=================");
+
+    return request;
+  },
+  function (error) {
+    // console.log({ int: error });
+
+    return request;
   }
 );
 

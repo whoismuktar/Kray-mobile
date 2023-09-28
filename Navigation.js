@@ -66,7 +66,8 @@ import { Pressable, View, ImageBackground } from "react-native";
 import UserCard from "./src/components/UserCard";
 import Text from "./src/components/Text";
 import { deviceHeight, getFullName } from "./src/utils/helpers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { destroyAccessToken } from "./redux/user";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -74,6 +75,7 @@ const Drawer = createDrawerNavigator();
 
 function DrawerContent(props) {
   const { isProfAccount, user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const studentMenu = [
     {
@@ -107,6 +109,12 @@ function DrawerContent(props) {
   ];
 
   const menu = isProfAccount ? profMenu : studentMenu;
+  const logOut = () => {
+    dispatch(destroyAccessToken());
+    props.navigation.navigate("Auth");
+
+    console.log("log out");
+  };
 
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
@@ -190,7 +198,9 @@ function DrawerContent(props) {
             onPress={() => props.navigation.navigate("Login")}
           >
             <ArrowRightOnRectangleIcon size={20} color={baseStyle.black} />
-            <Text style={{ marginLeft: 10 }}>Log Out</Text>
+            <Pressable onPress={() => logOut()}>
+              <Text style={{ marginLeft: 10 }}>Log Out</Text>
+            </Pressable>
           </Pressable>
         </View>
       </View>
@@ -199,7 +209,8 @@ function DrawerContent(props) {
 }
 
 function BottomNav() {
-  const { isProfAccount } = useSelector((state) => state.user);
+  const { isProfAccount, access_token } = useSelector((state) => state.user);
+  const isAuthenticated = access_token !== null;
 
   const BottomLabel = ({ focused, title }) => {
     return focused ? (
@@ -223,7 +234,7 @@ function BottomNav() {
 
   const StudentBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName="Home" // change during auth
+      initialRouteName={isAuthenticated ? "Login" : "Home"} // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -332,7 +343,7 @@ function BottomNav() {
   );
   const ProfBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName="EditProfile" // change during auth
+      initialRouteName={isAuthenticated ? "Login" : "Home"} // change during auth
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -442,12 +453,13 @@ function BottomNav() {
 }
 
 function DrawerNav() {
-  const { isProfAccount } = useSelector((state) => state.user);
+  const { isProfAccount, access_token } = useSelector((state) => state.user);
+  const isAuthenticated = access_token !== null;
 
   const StudentDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="Main" // change during auth
+      initialRouteName={isAuthenticated ? "Login" : "Main"} // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -571,7 +583,7 @@ function DrawerNav() {
   const ProfDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName="SignUp" // change during auth
+      initialRouteName={isAuthenticated ? "Login" : "Main"} // change during auth
       screenOptions={{
         drawerType: "front",
         headerShown: false,

@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  access_token: null,
   isProfAuth: false,
-  isProfAccount: true,
+  isProfAccount: false,
   appointmentRequests: [1,2,3,4,5,6,7,8,9],
   user: {
+
     id: 3,
     username: "YOY",
     firstName: "Yusuf",
@@ -129,10 +131,18 @@ export const appSlice = createSlice({
     setIsProfAuth: (state, action) => {
       state.isProfAuth = action.payload;
     },
+    setAccessToken: (state, action) => {
+      state.access_token = action.payload;
+    },
+    destroyAccessToken: (state, action) => {
+      state.access_token = null;
+      state.isProfAccount = false;
+      state.isProfAuth = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setIsProfAuth} = appSlice.actions;
+export const {setIsProfAuth, setAccessToken, destroyAccessToken} = appSlice.actions;
 
 export default appSlice.reducer;

@@ -8,6 +8,19 @@ const initialState = {
     currentStage: 1,
     stages: 3,
   },
+  quotes: [
+    "Be kind to yourself. Remember, you are doing the best you can with what you know at this moment.",
+    "Your mental health is just as important as your physical health.",
+    "Strength doesn't come from what you can do; it comes from overcoming the things you once thought you couldn't.",
+    "You are not defined by your struggles, but by how you overcome them.",
+    "Mental illness is not a sign of weakness; it's a sign of strength because you're still fighting.",
+    "Healing may not be easy, but it's possible. Keep going.",
+    "You are not alone in this battle; there is hope and help available.",
+    "Your value is not determined by your productivity. You are valuable just as you are.",
+    "In the darkest moments, remember that stars can't shine without darkness.",
+    "Taking care of your mental health is an act of self-love.",
+    "Your story isn't over; there are beautiful chapters yet to be written.",
+  ],
   activities: [
     {
       id: "drinkWater",
