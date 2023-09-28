@@ -94,6 +94,7 @@ const initialState = {
     { name: "Confused", icon: "🫤" },
     { name: "Angry", icon: "😡" },
   ],
+  moodReasons: ["FAMILY", "ACADEMICS", "HEALTH", "FRIENDSHIP", "RELATIONSHIPS"],
 };
 
 export const appSlice = createSlice({
