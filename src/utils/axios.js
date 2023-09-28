@@ -6,7 +6,7 @@ const baseURL = "http://192.168.1.7:8080/api/v1";
 const instance = axios.create({
   baseURL,
   headers: {
-    // Authorization: TOKEN && `Bearer ${TOKEN}`,
+    Authorization: TOKEN && `Bearer ${TOKEN}`,
     Accept: "application/json",
     "Content-Type": "application/json; charset=utf-8",
   },
@@ -28,9 +28,8 @@ instance.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log(Object.keys(error));
-    console.log("msg", error.message);
-    console.log({ error });
+
+    console.log("err msg", error.response.message);
 
     if (error.code === "ERR_NETWORK") {
       console.log("Network erorr");
@@ -45,7 +44,6 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 
 instance.interceptors.request.use(
   function (request) {

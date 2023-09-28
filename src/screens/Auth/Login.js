@@ -147,7 +147,6 @@ const SignUp = () => {
             // disabled={true}
             loader={authLoading}
             text="Log In"
-            // onPress={() => navigation.navigate("Main")}
             onPress={() => handleLogin()}
           />
         </View>

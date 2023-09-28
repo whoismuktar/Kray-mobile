@@ -254,7 +254,7 @@ const Booking = ({ isRequest }) => {
       {statusPick !== "" && (
         <View
           style={{
-            backgroundColor:'rgba(0,0,0,0.5)',
+            backgroundColor: "rgba(0,0,0,0.5)",
             height: deviceHeight,
             width: deviceWidth,
             zIndex: 999999,
@@ -269,7 +269,7 @@ const Booking = ({ isRequest }) => {
             snapPoints={snapPoints}
             onChange={handleSheetChanges}
             enablePanDownToClose={true}
-            style={{paddingHorizontal: 20}}
+            style={{ paddingHorizontal: 20 }}
           >
             <View>
               {statusPick === "decline" && <DeclineHandler />}
