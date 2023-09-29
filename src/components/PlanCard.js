@@ -10,6 +10,9 @@ import { useNavigation } from "@react-navigation/core";
 const PlanCard = ({ plan, id }) => {
   const navigation = useNavigation();
 
+  const isHealthPlan = plan.hasOwnProperty("activity")
+  const planType =  isHealthPlan ? "Health Plan" : "Goal"
+
   return (
     <View
       style={{
@@ -51,7 +54,7 @@ const PlanCard = ({ plan, id }) => {
       </View>
 
       <View>
-        <Button text="Health Plan" type="pryBtn" minimal />
+        <Button text={planType} type="pryBtn" minimal />
       </View>
     </View>
   );

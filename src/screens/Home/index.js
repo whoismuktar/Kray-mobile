@@ -22,9 +22,12 @@ import Toast from "react-native-toast-message";
 import { createMood } from "../../services/user";
 import { setIsAppModalActive } from "../../../redux/app";
 import AppModal from "../../components/AppModal";
+import PlanCard from "../../components/PlanCard";
+import { allGoals, allPlans } from "../../services/resources";
+import { setUserGoals, setUserPlans } from "../../../redux/user";
 
 function Home(props) {
-  const { isProfAccount, userActivities, access_token } = useSelector(
+  const { isProfAccount, userActivities, userPlans } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ function Home(props) {
   const [bottomActive, setBottomActive] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
   const [moodRes, setMoodRes] = useState("");
+  const [quoteOfTheDay, setQuoteOfTheDay] = useState("");
 
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => ["65%", "100%"], []);
@@ -111,25 +115,41 @@ function Home(props) {
       setSaveLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log({ moodReasonsSelection });
-  }, [moodReasonsSelection]);
-
-  const quoteOfTheDay = () => {
-    const idx = Math.floor(Math.random() * quotes.length);
-
-    console.log(idx);
-    return quotes[idx];
-  };
-
   const handleEmmitedMood = (mood) => {
     setChooseMoodActive(true);
     setBottomActive(true);
     setMoodSelection(mood);
   };
 
-  console.log({ access_token });
+  useMemo(() => {
+    console.log("render");
+    // const getResources = () => {
+    //   Promise.all([allGoals(), allPlans()])
+    //     .then((res) => {
+    //       dispatch(setUserGoals(res[0].data.data));
+    //       dispatch(setUserPlans(res[1].data.data));
+    //     })
+    //     .catch((err) => {
+    //       const message = "Error fetching services";
+
+    //       Toast.show({
+    //         type: "error",
+    //         text1: message,
+    //       });
+    //     });
+    // };
+    // getResources();
+  }, []);
+
+  useEffect(() => {
+    const quoteOfTheDay = () => {
+      const idx = Math.floor(Math.random() * quotes.length);
+
+      return quotes[idx];
+    };
+    setQuoteOfTheDay(quoteOfTheDay());
+    // getResources();
+  }, []);
 
   return (
     <>
@@ -142,7 +162,7 @@ function Home(props) {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={baseStyle.section}>
               <View style={styles.heroCard}>
-                <Text>"{quoteOfTheDay()}"</Text>
+                <Text>"{quoteOfTheDay}"</Text>
               </View>
             </View>
 
@@ -161,6 +181,19 @@ function Home(props) {
                   <View style={{ marginBottom: 20 }}></View>
                 }
                 renderItem={({ item, index }) => <MoodCard activity={item} />}
+              />
+            </View>
+
+            <View style={{ marginTop: 40 }}>
+              <Text type="header1">Your Progress</Text>
+              <FlatList
+                keyExtractor={(item, index) => index}
+                data={userPlans}
+                scrollEnabled={false}
+                ItemSeparatorComponent={
+                  <View style={{ marginBottom: 20 }}></View>
+                }
+                renderItem={({ item, index }) => <PlanCard plan={item} />}
               />
             </View>
           </ScrollView>
@@ -237,10 +270,11 @@ function Home(props) {
                 marginTop: deviceHeight * 0.1,
               }}
             >
-              <ScrollView 
-              style={{
-                maxHeight: deviceHeight* 0.5
-              }}>
+              <ScrollView
+                style={{
+                  maxHeight: deviceHeight * 0.5,
+                }}
+              >
                 <Text>{`${moodRes}`}</Text>
               </ScrollView>
               <View style={{ flex: 1 }}></View>

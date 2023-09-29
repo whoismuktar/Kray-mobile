@@ -12,6 +12,7 @@ const initialState = {
     lastName: "Yusuf",
     bio: "A food enthusiast",
   },
+  userGoals: [],
   userPlans: [
     {
       title: "Meditation & Mindfulness",
@@ -138,11 +139,24 @@ export const appSlice = createSlice({
       state.isProfAccount = false;
       state.isProfAuth = false;
     },
+    setUserGoals: (state, action) => {
+      console.log({setUserGoals: action.payload});
+      state.userGoals = action.payload;
+    },
+    setUserPlans: (state, action) => {
+      console.log({setUserPlans: action.payload});
+      state.userPlans = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setIsProfAuth, setAccessToken, destroyAccessToken } =
-  appSlice.actions;
+export const {
+  setIsProfAuth,
+  setAccessToken,
+  destroyAccessToken,
+  setUserGoals,
+  setUserPlans,
+} = appSlice.actions;
 
 export default appSlice.reducer;

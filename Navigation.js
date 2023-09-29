@@ -454,8 +454,8 @@ function BottomNav() {
       />
     </BottomTab.Navigator>
   );
-  // return <>{isProfAccount ? <ProfBottomTab /> : <StudentBottomTab />}</>;
-  return <StudentBottomTab />;
+  return <>{isProfAccount ? <ProfBottomTab /> : <StudentBottomTab />}</>;
+  // return <StudentBottomTab />;
 }
 
 function DrawerNav() {
@@ -704,14 +704,14 @@ function DrawerNav() {
     </Drawer.Navigator>
   );
 
-  // return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
-  return <StudentDrawerNav />
+  return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
+  // return <StudentDrawerNav />
 }
 
 export default function Navigator() {
   return (
     <NavigationContainer>
-      <DrawerNav />
+      <BottomNav />
     </NavigationContainer>
   );
 }
