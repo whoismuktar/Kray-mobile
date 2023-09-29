@@ -1,11 +1,13 @@
 import axios from "../utils/axios";
 
 export const allGoals = () => {
-  return axios.get("/goal/getAllGoals" );
+  return axios.get("/goal/getAllGoals");
 };
-
 
 export const allPlans = () => {
-  return axios.get("/health-plan/getAll" );
+  return axios.get("/health-plan/getAll");
 };
 
+export const createGoal = (data) => {
+  return axios.post("/goal/addGoal", data);
+};
