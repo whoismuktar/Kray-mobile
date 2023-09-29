@@ -21,7 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 import HeaderLeft from "../../components/HeaderLeft";
 import { login } from "../../services/auth";
 import { useDispatch } from "react-redux";
-import { setAccessToken } from "../../../redux/user";
+import { setAccessToken, setUserId } from "../../../redux/user";
 import Toast from "react-native-toast-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -47,12 +47,15 @@ const Login = ({navigation}) => {
     login({ email, password })
       .then((res) => {
         const token = res.data.token;
+        const userId = res.data.id;
 
         AsyncStorage.setItem("access_token", token)
+        AsyncStorage.setItem("userId", JSON.stringify(userId))
         .then(() => {
           setAuthLoading(false);
           navigation.navigate("Main", { screen: "Home" });
           dispatch(setAccessToken(token));
+          dispatch(setUserId(userId));
         })
         .catch((e) => {
           console.log("Error storing token in AsyncStorage:", e);

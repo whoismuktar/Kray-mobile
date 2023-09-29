@@ -23,8 +23,15 @@ import { createMood } from "../../services/user";
 import { setIsAppModalActive } from "../../../redux/app";
 import AppModal from "../../components/AppModal";
 import PlanCard from "../../components/PlanCard";
-import { allGoals, allPlans } from "../../services/resources";
-import { setUserGoals, setUserPlans } from "../../../redux/user";
+import { allHealthProf, allGoals, allPlans, findUserById } from "../../services/resources";
+import {
+  setAllHealthProf,
+  setUserDetails,
+  setUserGoals,
+  setUserId,
+  setUserPlans,
+} from "../../../redux/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home(props) {
   const { isProfAccount, userActivities, userPlans } = useSelector(
@@ -123,22 +130,25 @@ function Home(props) {
 
   useMemo(() => {
     console.log("render");
-    // const getResources = () => {
-    //   Promise.all([allGoals(), allPlans()])
-    //     .then((res) => {
-    //       dispatch(setUserGoals(res[0].data.data));
-    //       dispatch(setUserPlans(res[1].data.data));
-    //     })
-    //     .catch((err) => {
-    //       const message = "Error fetching services";
+    const getResources = async () => {
+      // const userId = await AsyncStorage("userId")
+      Promise.all([allGoals(), allPlans(), allHealthProf()])
+        .then((res) => {
+          dispatch(setUserGoals(res[0].data.data));
+          dispatch(setUserPlans(res[1].data));
+          dispatch(setAllHealthProf(res[2].data.data));
+        })
+        .catch((err) => {
+          console.log({err});
+          const message = "Error fetching services";
 
-    //       Toast.show({
-    //         type: "error",
-    //         text1: message,
-    //       });
-    //     });
-    // };
-    // getResources();
+          Toast.show({
+            type: "error",
+            text1: message,
+          });
+        });
+    };
+    getResources();
   }, []);
 
   useEffect(() => {
@@ -156,7 +166,7 @@ function Home(props) {
       {isProfAccount ? (
         <ProfHome />
       ) : (
-        <View style={styles.page}>
+        <View style={[styles.page, {paddingTop: 10}]}>
           <UserCard greetUser iconOnPress={() => navigation.openDrawer()} />
 
           <ScrollView showsVerticalScrollIndicator={false}>

@@ -18,6 +18,7 @@ import {
   ArrowRightOnRectangleIcon,
   FolderIcon,
   ChartPieIcon,
+  ArrowRightCircleIcon,
 } from "react-native-heroicons/solid";
 import {
   HomeIcon as HomeIconOut,
@@ -90,9 +91,19 @@ function DrawerContent(props) {
       icon: <BellIcon color={baseStyle.black} size={20} />,
     },
     {
-      title: "Analytics",
-      path: "Analytics",
-      icon: <ChartBarIcon color={baseStyle.black} size={20} />,
+      title: "Explore",
+      path: "Explore",
+      icon: <ArrowRightCircleIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Plans",
+      path: "Plans",
+      icon: <ArrowRightCircleIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Bookings",
+      path: "Bookings",
+      icon: <ArrowRightCircleIcon color={baseStyle.black} size={20} />,
     },
     {
       title: "Settings",
@@ -103,13 +114,39 @@ function DrawerContent(props) {
 
   const profMenu = [
     {
+      title: "Tasks",
+      path: "Tasks",
+      icon: <ArrowRightCircleIcon color={baseStyle.black} size={20} />,
+    },
+    {
+      title: "Bookings",
+      path: "Bookings",
+      icon: <ArrowRightCircleIcon color={baseStyle.black} size={20} />,
+    },
+    {
       title: "Profile",
       path: "Profile",
       icon: <UserCircleIcon color={baseStyle.black} size={20} />,
     },
   ];
 
+  const generalMenu = [
+    {
+      title: "Home",
+      path: "Home",
+    },
+    {
+      title: "Profile",
+      path: "Profile",
+    },
+    {
+      title: "Analytics",
+      path: "Analytics",
+    },
+  ];
+
   const menu = isProfAccount ? profMenu : studentMenu;
+
   const logOut = async () => {
     dispatch(destroyAccessToken());
     props.navigation.navigate("Auth");
@@ -120,7 +157,7 @@ function DrawerContent(props) {
   };
 
   return (
-    <DrawerContentScrollView {...props} scrollEnabled={false}>
+    <DrawerContentScrollView {...props} scrollEnabled={true}>
       {/* <DrawerItemList {...props} /> // default listing */}
       {/* <DrawerItem
         label="Help"
@@ -168,6 +205,31 @@ function DrawerContent(props) {
         </View>
 
         <View>
+          {generalMenu.map((menu, i) => {
+            return (
+              <Pressable
+                key={i}
+                onPress={() => props.navigation.navigate(menu.path)}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingVertical: 15,
+                }}
+              >
+                {menu.icon}
+                <Text style={{ marginLeft: 10 }}>{menu.title}</Text>
+              </Pressable>
+            );
+          })}
+
+          <View
+            style={{
+              height: 1,
+              backgroundColor: baseStyle.black,
+              width: "100%",
+            }}
+          ></View>
+
           {menu.map((menu, i) => {
             return (
               <Pressable
@@ -189,9 +251,9 @@ function DrawerContent(props) {
         <View
           style={[
             !isProfAccount && {
-              position: "absolute",
-              bottom: 20,
-              left: 20,
+              // position: "absolute",
+              // bottom: 20,
+              // left: 20,
               width: "100%",
             },
           ]}
@@ -213,9 +275,10 @@ function DrawerContent(props) {
 
 function BottomNav() {
   const { isProfAccount, access_token } = useSelector((state) => state.user);
-  const isAuthenticated = async ()=> await AsyncStorage.getItem("access_token");
+  const isAuthenticated = async () =>
+    await AsyncStorage.getItem("access_token");
 
-  console.log({isAuthenticated: isAuthenticated()});
+  console.log({ isAuthenticated: isAuthenticated() });
 
   const BottomLabel = ({ focused, title }) => {
     return focused ? (
@@ -239,7 +302,7 @@ function BottomNav() {
 
   const StudentBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName={isAuthenticated() ? "Login" : "Home"}
+      initialRouteName="Home"
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -263,32 +326,14 @@ function BottomNav() {
           fontWeight: "500",
           fontSize: 20,
         },
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          gestureEnabled: true,
-          tabBarLabelStyle: {},
-          tabBarLabel: ({ focused, color, size }) => {
-            return <BottomLabel focused={focused} title="Home" />;
-          },
-          tabBarIcon: ({ focused, color, size }) =>
-            focused ? (
-              <HomeIcon color={baseStyle.pryColor} size={26} />
-            ) : (
-              <HomeIconOut color={baseStyle.pryColor} size={26} />
-            ),
-        }}
-      />
       <BottomTab.Screen
         name="Explore"
         component={ExploreScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: "Explore",
           tabBarLabel: ({ focused, color, size }) => {
             return <BottomLabel focused={focused} title="Explore" />;
@@ -348,7 +393,7 @@ function BottomNav() {
   );
   const ProfBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName={isAuthenticated() ? "Login" : "Home"}
+      initialRouteName="Home"
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -372,32 +417,14 @@ function BottomNav() {
           fontWeight: "500",
           fontSize: 20,
         },
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          gestureEnabled: true,
-          tabBarLabelStyle: {},
-          tabBarLabel: ({ focused, color, size }) => {
-            return <BottomLabel focused={focused} title="Home" />;
-          },
-          tabBarIcon: ({ focused, color, size }) =>
-            focused ? (
-              <HomeIcon color={baseStyle.pryColor} size={26} />
-            ) : (
-              <HomeIconOut color={baseStyle.pryColor} size={26} />
-            ),
-        }}
-      />
       <BottomTab.Screen
         name="Tasks"
         component={ExploreScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: "Tasks",
           tabBarLabel: ({ focused, color, size }) => {
             return <BottomLabel focused={focused} title="Tasks" />;
@@ -460,62 +487,22 @@ function BottomNav() {
 
 function DrawerNav() {
   const { isProfAccount, access_token } = useSelector((state) => state.user);
-  const isAuthenticated = async ()=> await AsyncStorage.getItem("access_token");
+  const isAuthenticated = async () =>
+    await AsyncStorage.getItem("access_token");
 
-  console.log({isAuthenticated: isAuthenticated()});
+  console.log({ isAuthenticated: isAuthenticated() });
 
   const StudentDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName={isAuthenticated() ? "Login" : "Main"}
+      initialRouteName="Home"
       screenOptions={{
         drawerType: "front",
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <Drawer.Screen name="Main" options={{}} component={BottomNav} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-      <Drawer.Screen name="Notification" component={NotificationScreen} />
-      <Drawer.Screen name="Analytics" component={AnalyticsScreen} />
-      <Drawer.Screen name="Settings" component={SettingsScreen} />
+      {/* <Drawer.Screen name="Main" options={{}} component={BottomNav} /> */}
 
-      <Stack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
-        options={{}}
-      />
-      <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <HeaderLeft />,
-          headerTitle: "Create New Plan",
-          headerTitleAlign: "left",
-        }}
-      />
-      <Stack.Screen name="Login" component={LoginScreen} options={{}} />
-      <Stack.Screen
-        name="RegisterVerification"
-        component={RegisterVerificationScreen}
-        options={{}}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordScreen}
-        options={{}}
-      />
-      <Stack.Screen
-        name="ChangePassword"
-        component={ChangePasswordScreen}
-        options={{}}
-      />
-      <Stack.Screen
-        name="SelectActivity"
-        component={SelectActivityScreen}
-        options={{}}
-      />
       <Stack.Screen
         name="NewGoal"
         component={NewGoalScreen}
@@ -588,49 +575,16 @@ function DrawerNav() {
       />
     </Drawer.Navigator>
   );
-  const ProfDrawerNav = () => (
+
+  return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName={isAuthenticated() ? "Login" : "Main"}
+      initialRouteName="Home"
       screenOptions={{
         drawerType: "front",
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <Drawer.Screen name="Main" options={{}} component={BottomNav} />
-
-      <Stack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
-        options={{}}
-      />
-      <Stack.Screen name="Auth" component={AuthScreen} options={{}} />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{
-          headerShown: true,
-          headerLeft: () => <HeaderLeft />,
-          headerTitle: "Create New Account",
-          headerTitleAlign: "left",
-        }}
-      />
-      <Stack.Screen name="Login" component={LoginScreen} options={{}} />
-      <Stack.Screen
-        name="RegisterVerification"
-        component={RegisterVerificationScreen}
-        options={{}}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordScreen}
-        options={{}}
-      />
-      <Stack.Screen
-        name="ChangePassword"
-        component={ChangePasswordScreen}
-        options={{}}
-      />
       <Stack.Screen
         name="ProProfile"
         component={ProProfileScreen}
@@ -701,17 +655,87 @@ function DrawerNav() {
           headerTitleAlign: "left",
         }}
       />
+
+      {/* NEW */}
+
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: true,
+          gestureEnabled: true,
+          tabBarLabelStyle: {},
+        }}
+      />
+      <Drawer.Screen name="Notification" component={NotificationScreen} />
+      <Drawer.Screen name="Analytics" component={AnalyticsScreen} />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
+
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{}}
+      />
+      <Stack.Screen
+        name="Auth"
+        component={AuthScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{
+          headerShown: false,
+          headerLeft: () => <HeaderLeft />,
+          headerTitle: "Create New Plan",
+          headerTitleAlign: "left",
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="RegisterVerification"
+        component={RegisterVerificationScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SelectActivity"
+        component={SelectActivityScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Drawer.Navigator>
   );
-
-  return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
-  // return <StudentDrawerNav />
 }
 
 export default function Navigator() {
   return (
     <NavigationContainer>
-      <BottomNav />
+      <DrawerNav />
     </NavigationContainer>
   );
 }

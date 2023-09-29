@@ -51,11 +51,11 @@ const PlanCard = ({ professional, id }) => {
 
       <View style={{ flex: 1 }}>
         <Text type="paragraph3" style={{ marginBottom: 10 }}>
-          {`${professional.prefix}. ${professional.firstName} ${professional.lastName}`}
+          {`Dr. ${professional.firstName} ${professional.lastName}`}
         </Text>
         <Text type="paragraph4">{professional.specialization}</Text>
 
-        <View
+        {professional?.location && <View
           style={{
             flexDirection: "row",
             alignItems: "center",
@@ -63,14 +63,14 @@ const PlanCard = ({ professional, id }) => {
         >
           <MapPinIcon color={baseStyle.gray800} style={{ marginRight: 5 }} />
           <Text type="paragraph4">{`${professional.location}`}</Text>
-        </View>
+        </View>}
 
         <Button
           text="Book a session"
           type="pryBtn"
           minimal
           style={{ marginTop: 10 }}
-          onPress={() => navigation.navigate("NewBooking", { profId: 2 })}
+          onPress={() => navigation.navigate("NewBooking", { profId: professional.id })}
         />
       </View>
     </View>

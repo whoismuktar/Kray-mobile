@@ -11,6 +11,15 @@ export const allPlans = () => {
 export const createGoal = (data) => {
   return axios.post("/goal/addGoal", data);
 };
+
 export const createPlan = (data) => {
   return axios.post("/health-plan/add", data);
+};
+
+export const allHealthProf = () => {
+  return axios.get("/user/getAllUsersByCategory?userCategory=healthprof");
+};
+
+export const findUserById = (userId) => {
+  return axios.get(`/user/${userId}`);
 };

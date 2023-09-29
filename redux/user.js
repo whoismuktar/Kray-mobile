@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   access_token: "",
+  userId: null,
+  userDetails: {},
   isProfAuth: false,
   isProfAccount: false,
   appointmentRequests: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -95,9 +97,9 @@ const initialState = {
     },
     {
       prefix: "Dr",
-      firstName: "Alex",
-      lastName: "Morgan",
-      location: "London",
+      firstName: "Riddick",
+      lastName: "Banks",
+      location: "South Africa",
       about:
         "I am Alex Morgan, an experienced anxiety therapist dedicated to helping individuals find relief and empowerment in their mental health journey.",
       availability: [
@@ -109,9 +111,9 @@ const initialState = {
     },
     {
       prefix: "Dr",
-      firstName: "Alex",
-      lastName: "Morgan",
-      location: "London",
+      firstName: "Jonathan",
+      lastName: "Smith",
+      location: "Paris",
       about:
         "I am Alex Morgan, an experienced anxiety therapist dedicated to helping individuals find relief and empowerment in their mental health journey.",
       availability: [
@@ -134,18 +136,25 @@ export const appSlice = createSlice({
     setAccessToken: (state, action) => {
       state.access_token = action.payload;
     },
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+    },
+    setUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
     destroyAccessToken: (state, action) => {
       state.access_token = null;
       state.isProfAccount = false;
       state.isProfAuth = false;
     },
     setUserGoals: (state, action) => {
-      console.log({setUserGoals: action.payload});
       state.userGoals = action.payload;
     },
     setUserPlans: (state, action) => {
-      console.log({setUserPlans: action.payload});
       state.userPlans = action.payload;
+    },
+    setAllHealthProf: (state, action) => {
+      state.professionals = action.payload;
     },
   },
 });
@@ -154,9 +163,12 @@ export const appSlice = createSlice({
 export const {
   setIsProfAuth,
   setAccessToken,
+  setUserId,
+  setUserDetails,
   destroyAccessToken,
   setUserGoals,
   setUserPlans,
+  setAllHealthProf
 } = appSlice.actions;
 
 export default appSlice.reducer;
