@@ -68,6 +68,7 @@ import Text from "./src/components/Text";
 import { deviceHeight, getFullName } from "./src/utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { destroyAccessToken } from "./redux/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -109,11 +110,13 @@ function DrawerContent(props) {
   ];
 
   const menu = isProfAccount ? profMenu : studentMenu;
-  const logOut = () => {
+  const logOut = async () => {
     dispatch(destroyAccessToken());
     props.navigation.navigate("Auth");
 
     console.log("log out");
+    await AsyncStorage.removeItem("access_token");
+    console.log(await AsyncStorage.getItem("access_token"));
   };
 
   return (
@@ -210,7 +213,9 @@ function DrawerContent(props) {
 
 function BottomNav() {
   const { isProfAccount, access_token } = useSelector((state) => state.user);
-  const isAuthenticated = access_token !== null;
+  const isAuthenticated = async ()=> await AsyncStorage.getItem("access_token");
+
+  console.log({isAuthenticated: isAuthenticated()});
 
   const BottomLabel = ({ focused, title }) => {
     return focused ? (
@@ -234,7 +239,7 @@ function BottomNav() {
 
   const StudentBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName={isAuthenticated ? "Login" : "Home"} // change during auth
+      initialRouteName={isAuthenticated() ? "Login" : "Home"}
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -343,7 +348,7 @@ function BottomNav() {
   );
   const ProfBottomTab = () => (
     <BottomTab.Navigator
-      initialRouteName={isAuthenticated ? "Login" : "Home"} // change during auth
+      initialRouteName={isAuthenticated() ? "Login" : "Home"}
       screenOptions={{
         // tabBarActiveTintColor: "blue",
         tabBarLabelStyle: {
@@ -449,17 +454,20 @@ function BottomNav() {
       />
     </BottomTab.Navigator>
   );
-  return <>{isProfAccount ? <ProfBottomTab /> : <StudentBottomTab />}</>;
+  // return <>{isProfAccount ? <ProfBottomTab /> : <StudentBottomTab />}</>;
+  return <StudentBottomTab />;
 }
 
 function DrawerNav() {
   const { isProfAccount, access_token } = useSelector((state) => state.user);
-  const isAuthenticated = access_token !== null;
+  const isAuthenticated = async ()=> await AsyncStorage.getItem("access_token");
+
+  console.log({isAuthenticated: isAuthenticated()});
 
   const StudentDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName={isAuthenticated ? "Login" : "Main"} // change during auth
+      initialRouteName={isAuthenticated() ? "Login" : "Main"}
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -583,7 +591,7 @@ function DrawerNav() {
   const ProfDrawerNav = () => (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerContent {...props} />}
-      initialRouteName={isAuthenticated ? "Login" : "Main"} // change during auth
+      initialRouteName={isAuthenticated() ? "Login" : "Main"}
       screenOptions={{
         drawerType: "front",
         headerShown: false,
@@ -696,7 +704,8 @@ function DrawerNav() {
     </Drawer.Navigator>
   );
 
-  return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
+  // return <>{isProfAccount ? <ProfDrawerNav /> : <StudentDrawerNav />}</>;
+  return <StudentDrawerNav />
 }
 
 export default function Navigator() {

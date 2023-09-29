@@ -22,6 +22,8 @@ import HeaderLeft from "../../components/HeaderLeft";
 import { login } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../../redux/user";
+import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -29,8 +31,8 @@ const HideKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-const SignUp = () => {
-  const navigation = useNavigation();
+const Login = ({navigation}) => {
+  // const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("studentTestAccount@gmail.com");
@@ -44,15 +46,23 @@ const SignUp = () => {
 
     login({ email, password })
       .then((res) => {
-        const { token } = res.data.token;
-        dispatch(setAccessToken(token));
+        const token = res.data.token;
 
-        setAuthLoading(false);
-        navigation.navigate("Home");
+        AsyncStorage.setItem("access_token", token)
+        .then(() => {
+          setAuthLoading(false);
+          navigation.navigate("Main", { screen: "Home" });
+          dispatch(setAccessToken(token));
+        })
+        .catch((e) => {
+          console.log("Error storing token in AsyncStorage:", e);
+          setAuthLoading(false);
+        });
       })
       .catch((e) => {
-        const { message } =
-          e.response?.data || "There was an issue signing you in";
+        console.log({ e });
+        console.log("msg: ", e.message);
+        const message = "There was an issue signing you in";
 
         Toast.show({
           type: "error",
@@ -186,4 +196,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

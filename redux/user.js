@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  access_token: null,
+  access_token: "",
   isProfAuth: false,
   isProfAccount: false,
-  appointmentRequests: [1,2,3,4,5,6,7,8,9],
+  appointmentRequests: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   user: {
-
     id: 3,
     username: "YOY",
     firstName: "Yusuf",
@@ -143,6 +142,7 @@ export const appSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {setIsProfAuth, setAccessToken, destroyAccessToken} = appSlice.actions;
+export const { setIsProfAuth, setAccessToken, destroyAccessToken } =
+  appSlice.actions;
 
 export default appSlice.reducer;

@@ -68,6 +68,7 @@ function ProfHome(props) {
               flexDirection: "row",
               justifyContent: "space-between",
               marginBottom: 20,
+              
             }}
           >
             <Text weight="medium">Upcoming Appointment</Text>

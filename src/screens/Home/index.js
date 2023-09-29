@@ -11,7 +11,7 @@ import Text from "../../components/Text";
 import EmojiMoodCards from "../../components/EmojiMoodCards";
 import MoodCard from "../../components/MoodCard";
 import ProfHome from "./ProfHome";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { deviceHeight, deviceWidth } from "../../utils/helpers";
@@ -20,9 +20,14 @@ import Button from "../../components/Button";
 import Chip from "../../components/Chip";
 import Toast from "react-native-toast-message";
 import { createMood } from "../../services/user";
+import { setIsAppModalActive } from "../../../redux/app";
+import AppModal from "../../components/AppModal";
 
 function Home(props) {
-  const { isProfAccount, userActivities } = useSelector((state) => state.user);
+  const { isProfAccount, userActivities, access_token } = useSelector(
+    (state) => state.user
+  );
+  const dispatch = useDispatch();
   const { quotes, moodReasons } = useSelector((state) => state.app);
   const navigation = useNavigation();
 
@@ -31,12 +36,13 @@ function Home(props) {
   const [moodReasonsSelection, setMoodReasonsSelection] = useState([]);
   const [bottomActive, setBottomActive] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
+  const [moodRes, setMoodRes] = useState("");
 
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => ["65%", "100%"], []);
   const handleSheetChanges = useCallback((index) => {
     if (index === -1) {
-      resetMoodSelection()
+      resetMoodSelection();
     }
   }, []);
 
@@ -54,37 +60,49 @@ function Home(props) {
     setMoodReasonsSelection((selections) => [...selections, selection]);
   };
 
+  const toggleModal = (status) => {
+    dispatch(setIsAppModalActive(status));
+  };
+
   const resetMoodSelection = () => {
     setBottomActive(false);
     setChooseMoodActive(false);
     setMoodReasonsSelection([]);
     setMoodSelection({});
     setSaveLoading(false);
+
+    toggleModal(false);
+    setMoodRes("");
   };
 
   const handleCreateMood = async () => {
     const data = {
-      mood: moodSelection.name,
+      mood: moodSelection.name.toUpperCase(),
       reasons: moodReasonsSelection,
     };
 
-    if (!data.mood || !data.reasons) return
+    console.log({ payload: data });
+
+    if (!data.mood || data.reasons.length < 1) return;
 
     setSaveLoading(true);
     try {
       const res = await createMood(data);
-      console.log({ res });
-      const { message } = res?.data || "Mood Created";
+
+      setMoodRes(res.data);
+      const message = "Mood Created";
       Toast.show({
         type: "error",
         text1: message,
       });
 
-      resetMoodSelection();
+      toggleModal(true);
+      // resetMoodSelection();
     } catch (error) {
-      console.log({ error: error.response.data });
-      const message =
-        error.response?.data.message || "There was an issue creating mood";
+      console.log({ error });
+      console.log("mood err:", error.message);
+
+      const message = "There was an issue creating mood";
 
       Toast.show({
         type: "error",
@@ -106,11 +124,12 @@ function Home(props) {
   };
 
   const handleEmmitedMood = (mood) => {
-    console.log("mooder");
     setChooseMoodActive(true);
     setBottomActive(true);
     setMoodSelection(mood);
   };
+
+  console.log({ access_token });
 
   return (
     <>
@@ -205,6 +224,29 @@ function Home(props) {
               </BottomSheet>
             </View>
           )}
+
+          <AppModal>
+            <View
+              style={{
+                borderRadius: 20,
+                backgroundColor: baseStyle.white,
+                padding: 20,
+                alignSelf: "center",
+                width: deviceWidth * 0.8,
+                minHeight: deviceHeight * 0.5,
+                marginTop: deviceHeight * 0.1,
+              }}
+            >
+              <ScrollView 
+              style={{
+                maxHeight: deviceHeight* 0.5
+              }}>
+                <Text>{`${moodRes}`}</Text>
+              </ScrollView>
+              <View style={{ flex: 1 }}></View>
+              <Button text="Continue" onPress={resetMoodSelection} />
+            </View>
+          </AppModal>
         </View>
       )}
     </>

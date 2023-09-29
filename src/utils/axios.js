@@ -1,66 +1,35 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const TOKEN = "";
-const baseURL = "http://192.168.1.7:8080/api/v1";
+const baseURL = "http://192.168.1.6:8080/api/v1";
 
 const instance = axios.create({
   baseURL,
   headers: {
-    Authorization: TOKEN && `Bearer ${TOKEN}`,
     Accept: "application/json",
     "Content-Type": "application/json; charset=utf-8",
   },
 });
 
-console.log(process.env);
-// console.log({baseURL});
-console.log(axios.defaults);
-
-// RESPONSE INTERCEPTOR
-instance.interceptors.response.use(
-  function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-
-    console.log({ response });
-    return response;
-  },
-  function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-
-    console.log("err msg", error.response.message);
-
-    if (error.code === "ERR_NETWORK") {
-      console.log("Network erorr");
-      const text = error.message;
+// Create a function to set the Authorization header with the stored token
+const setAuthorizationHeader = async () => {
+  try {
+    const access_token = await AsyncStorage.getItem("access_token");
+    if (access_token) {
+      instance.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${access_token}`;
+    } else {
+      // Handle the case when the token is not found in AsyncStorage
+      // You can log an error or perform other actions here
     }
-
-    // if (error.response.status === 401) {
-    // console.log("No auth");
-
-    // localStorage.removeItem("auth_token");
-    // }
-    return Promise.reject(error);
+  } catch (error) {
+    // Handle errors here
+    console.error("Error setting Authorization header:", error);
   }
-);
+};
 
-instance.interceptors.request.use(
-  function (request) {
-    // console.log("=================");
-    // console.log("=================");
-    // console.log({ request });
-    // console.log("=================");
-    // console.log("=================");
-    // console.log("=================");
-
-    return request;
-  },
-  function (error) {
-    // console.log({ int: error });
-
-    return request;
-  }
-);
+// Call the setAuthorizationHeader function to set the initial header
+setAuthorizationHeader();
 
 export default instance;

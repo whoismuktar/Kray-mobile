@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Navigator from "./Navigation";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "./redux/store";
 import { useFonts } from "expo-font";
 import Toast from "react-native-toast-message";
+import AppModal from "./src/components/AppModal";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,6 +23,7 @@ export default function App() {
       <StatusBar style="auto" />
       <Navigator />
       <Toast />
+      {/* <AppModal /> */}
     </Provider>
   );
 }

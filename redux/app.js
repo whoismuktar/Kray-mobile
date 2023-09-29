@@ -4,6 +4,7 @@ import { baseStyle } from "../src/assets/styles/base";
 
 const initialState = {
   authMode: "professional",
+  isAppModalActive: false,
   onboarding: {
     currentStage: 1,
     stages: 3,
@@ -94,7 +95,7 @@ const initialState = {
     { name: "Confused", icon: "🫤" },
     { name: "Angry", icon: "😡" },
   ],
-  moodReasons: ["FAMILY", "ACADEMICS", "HEALTH", "FRIENDSHIP", "RELATIONSHIPS"],
+  moodReasons: ["FAMILY", "ACADEMICS", "HEALTH", "FRIENDS", "RELATIONSHIP"],
 };
 
 export const appSlice = createSlice({
@@ -104,10 +105,13 @@ export const appSlice = createSlice({
     setOnboardingCurrentStage: (state, action) => {
       state.onboarding.currentStage = action.payload;
     },
+    setIsAppModalActive: (state, action) => {
+      state.isAppModalActive = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setOnboardingCurrentStage } = appSlice.actions;
+export const { setOnboardingCurrentStage, setIsAppModalActive } = appSlice.actions;
 
 export default appSlice.reducer;
