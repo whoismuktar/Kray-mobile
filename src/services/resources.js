@@ -11,3 +11,6 @@ export const allPlans = () => {
 export const createGoal = (data) => {
   return axios.post("/goal/addGoal", data);
 };
+export const createPlan = (data) => {
+  return axios.post("/health-plan/add", data);
+};

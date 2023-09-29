@@ -15,6 +15,10 @@ import { DatePicker, Picker } from "react-native-woodpicker";
 import Checkbox from "expo-checkbox";
 import SelectActivity from "../Onboarding/SelectActivity";
 import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
+import Toast from "react-native-toast-message";
+import { createPlan } from "../../services/resources";
+import { setUserPlans } from "../../../redux/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const HideKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -33,7 +37,10 @@ const timelines = [
   },
 ];
 
-const NewPlan = () => {
+const NewPlan = ({navigation}) => {
+  const dispatch = useDispatch();
+  const { userPlans } = useSelector((state) => state.user);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -42,8 +49,9 @@ const NewPlan = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [endDateOpen, setEndDateOpen] = useState(false);
 
-  const [activities, setActivities] = useState(["hello"]);
-  const [timeline, setTimeline] = useState();
+  const [activities, setActivities] = useState([""]);
+  const [timeline, setTimeline] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const removeActivity = (i) => {
     if (activities.length < 2) return;
@@ -61,14 +69,67 @@ const NewPlan = () => {
     });
   };
 
-  const handleText = () => (
+  const handleText = (date) => (
     <View>
       <Button
-        text={startDate ? startDate.toDateString() : "Select Date"}
+        text={date ? date.toDateString() : "Select Date"}
         type="textBtn"
       />
     </View>
   );
+
+  const handleCreateGoal = async () => {
+    try {
+      const data = {
+        title,
+        description,
+        tags: "SELF_CARE",
+        activity: activities,
+        timeline: timeline.value,
+        startDate: JSON.stringify(startDate)
+          ?.split("T")[0]
+          .replace(/\\/g, "")
+          .replace(/"/g, ""),
+        endDate: JSON.stringify(endDate)
+          ?.split("T")[0]
+          .replace(/\\/g, "")
+          .replace(/"/g, ""),
+      };
+
+      const hasNullVal = Object.keys(data).some(
+        (k) => data[k] === "" || data[k] === undefined
+      );
+
+      if (hasNullVal) throw { message: "Required field missing" };
+
+      const hasEmptyActivity = activities.some(
+        (a) => a === "" || a === undefined
+      );
+      if (hasEmptyActivity) throw { message: "Activitycan not be empty" };
+
+      setLoading(true);
+
+      console.log({ data });
+
+      const res = await createPlan(data);
+      console.log({ res: res.data });
+
+      const all = [...userPlans, res.data];
+      dispatch(setUserPlans(all));
+
+      setLoading(false);
+
+      navigation.navigate("Plans");
+    } catch (error) {
+      console.log({ error });
+
+      Toast.show({
+        type: "error",
+        text1: error.message,
+      });
+      setLoading(false);
+    }
+  };
 
   return (
     <HideKeyboard>
@@ -108,7 +169,7 @@ const NewPlan = () => {
               type="paragraph4"
               style={{ marginBottom: 10 }}
             >
-              End Date
+              Start Date
             </Text>
             <DatePicker
               style={{
@@ -122,7 +183,7 @@ const NewPlan = () => {
               value={startDate}
               onDateChange={setStartDate}
               title="Date Picker"
-              text={handleText()}
+              text={handleText(startDate)}
               isNullable={false}
               iosDisplay="inline"
               minimumDate={new Date(Date.now())}
@@ -150,10 +211,10 @@ const NewPlan = () => {
               value={endDate}
               onDateChange={setEndDate}
               title="Date Picker"
-              text={handleText()}
+              text={handleText(endDate)}
               isNullable={false}
               iosDisplay="inline"
-              minimumDate={new Date(Date.now())}
+              minimumDate={startDate}
             />
           </View>
         </View>
@@ -212,9 +273,9 @@ const NewPlan = () => {
               paddingHorizontal: 20,
               borderRadius: 20,
               width: "47%",
-              color: baseStyle.white
+              color: baseStyle.white,
             }}
-            >
+          >
             <Picker
               item={timeline}
               items={timelines}
@@ -224,14 +285,13 @@ const NewPlan = () => {
               backdropAnimation={{ opacity: 0 }}
               isNullable
               textInputStyle={{
-                color: baseStyle.white
-
+                color: baseStyle.white,
               }}
             />
           </View>
         </View>
 
-        <Button text="Create" />
+        <Button text="Create" loader={loading} onPress={handleCreateGoal} />
       </ScrollView>
     </HideKeyboard>
   );

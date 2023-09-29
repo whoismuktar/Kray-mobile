@@ -119,7 +119,7 @@ const NewGoal = ({navigation}) => {
               type="paragraph4"
               style={{ marginBottom: 10 }}
             >
-              End Date
+              Start Date
             </Text>
             <DatePicker
               style={{
