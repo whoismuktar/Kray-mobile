@@ -10,8 +10,8 @@ const initialState = {
   user: {
     id: 3,
     username: "YOY",
-    firstName: "Yusuf",
-    lastName: "Yusuf",
+    firstName: "Alex",
+    lastName: "Morgan",
     bio: "A food enthusiast",
   },
   userGoals: [],
