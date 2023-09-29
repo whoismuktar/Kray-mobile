@@ -26,13 +26,13 @@ function MoodCard({ activity }) {
         </Text>
 
         <View style={{ flexDirection: "row" }}>
-          <Text>{getUnitIcon("time").icon}</Text>
+          <Text>{getUnitIcon(activity.unit).icon}</Text>
           <Text style={{ marginLeft: 10 }}>{activity.unitAmount}</Text>
         </View>
       </View>
 
       <View>
-        <Text style={{ fontSize: 40 }}>{getActivityType("sleep")?.icon}</Text>
+        <Text style={{ fontSize: 40 }}>{getActivityType(activity.type)?.icon}</Text>
       </View>
     </View>
   );
