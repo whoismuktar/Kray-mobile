@@ -6,7 +6,6 @@ function Svg({ svgMarkup }) {
     svgMarkup,
     "application/xml"
   );
-  console.log({ svgMarkup });
   const Yiga = () => <SvgXml xml={svgMarkup} width={300} />;
   return <Yiga />;
 }

@@ -4,7 +4,6 @@ import Text from "./Text";
 import { baseStyle } from "../assets/styles/base";
 
 function MoodCard({ activity }) {
-  console.log({ activity });
   const { activities, unitIcons } = useSelector((state) => state.app);
 
   const getActivityType = (name) => activities.find((a) => name === a.id);
