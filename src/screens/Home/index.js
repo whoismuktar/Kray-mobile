@@ -34,7 +34,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home(props) {
-  const { isProfAccount, userActivities, userPlans } = useSelector(
+  const { isProfAccount, userActivities, userPlans, userGoals } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -198,7 +198,7 @@ function Home(props) {
               <Text type="header1">Your Progress</Text>
               <FlatList
                 keyExtractor={(item, index) => index}
-                data={userPlans}
+                data={[...userPlans, ...userGoals]}
                 scrollEnabled={false}
                 ItemSeparatorComponent={
                   <View style={{ marginBottom: 20 }}></View>

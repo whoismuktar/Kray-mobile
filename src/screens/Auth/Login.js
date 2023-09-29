@@ -53,7 +53,7 @@ const Login = ({navigation}) => {
         AsyncStorage.setItem("userId", JSON.stringify(userId))
         .then(() => {
           setAuthLoading(false);
-          navigation.navigate("Main", { screen: "Home" });
+          navigation.navigate("Home");
           dispatch(setAccessToken(token));
           dispatch(setUserId(userId));
         })
